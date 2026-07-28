@@ -1,0 +1,66 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+.pnpm-store/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env
+.env.local
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# Local full-project migration bundles
+ai-werewolf-migration-*.tar.gz
+ai-werewolf-migration-*.tar.gz.sha256
+ai-werewolf-private-*.tar.gz.enc
+ai-werewolf-private-*.tar.gz.enc.sha256
+all-projects-migration-*.tar.gz
+all-projects-migration-*.tar.gz.sha256
+all-projects-private-*.tar.gz.enc
+all-projects-private-*.tar.gz.enc.sha256
+Apps-and-boring-4d-site-*.tar.gz
+Apps-and-boring-4d-site-*.tar.gz.sha256
+
+# OpenAI-generated AI portraits (see npm run gen:avatars)
+assets/avatars/generated/*.png
+
+# AI 陪练圆桌占位 sprite / 合成图（见 npm run gen:ai-coach-scene）
+assets/generated/ai_coach/
+
+# generated native folders
+/ios
+/android
+.vercel
+.vercel-home/
+.vercel-cache/
+.npm-cache/

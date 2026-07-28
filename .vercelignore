@@ -1,0 +1,15 @@
+# Local migration archives and checksums are not part of the website.
+*.tar.gz
+*.tar.gz.sha256
+
+# Local caches and private CLI state.
+.npm-cache/
+.vercel-cache/
+.vercel-home/
+
+# Local-only migration helpers and notes.
+MIGRATION*.md
+NEW-MAC*.md
+PRIVATE-MIGRATION*.md
+scripts/export-private-migration.sh
+scripts/restore-private-migration.sh

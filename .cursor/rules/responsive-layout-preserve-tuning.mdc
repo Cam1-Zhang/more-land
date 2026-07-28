@@ -1,0 +1,29 @@
+---
+description: Multi-resolution work must not change user-tuned layout constants (px shifts, margins, hot zones).
+alwaysApply: true
+---
+
+# Responsive layout: preserve tuned parameters
+
+When the user asks for **multi-resolution / cross-device compatibility** (e.g. “所有分辨率兼容”, “和别人电脑一样”, “不同屏幕一致”):
+
+## Do not change user-tuned values
+
+- **Never modify** existing layout constants the user has already tuned: `*_SHIFT_DOWN`, `*_SHIFT_UP`, `PICK_BANNER_SHIFT_DOWN`, `GUIDE_*`, `OPEN_BTN_HIT` percentages, `marginTop`/`padding` offsets in px, etc.
+- Treat those numbers as **fixed design coordinates** on the reference art (1024×576 / 587), not knobs to “fix” scaling.
+
+## Allowed approaches (current implementation)
+
+- Keep tuned numbers in `tutorialGuideLayout.ts` / component `PICK_*` / `GUIDE_*` / `OPEN_BTN_HIT` unchanged.
+- At runtime multiply by `useHubSceneLayoutScale(nativeArtWidth).px(tuned)` (see `src/hooks/useHubSceneLayoutScale.ts`); reference width defaults to `TUTORIAL_LAYOUT_REF_WIDTH` (1024).
+- `HubSceneBottomRightWidthFill` scales `shiftDown` internally the same way.
+- Percentage hit zones (`OPEN_BTN_HIT`) stay as-is — they already track the scaled background frame.
+- If you tuned on a **wider** window than 1024, set `TUTORIAL_LAYOUT_REF_WIDTH` in `tutorialLayoutReference.ts` to that width only — still do not change the tuned offset constants.
+
+## Before shipping responsive changes
+
+- Diff layout constant files (`tutorialGuideLayout.ts`, component-local `PICK_*` / `GUIDE_*` / `OPEN_BTN_HIT`) and confirm **zero changes** to user-tuned numbers unless the user explicitly asks to retune that value.
+
+## If scaling still looks wrong
+
+- Adjust the **scaling mechanism** (reference width, letterbox, stage bounds), or ask the user which **single** px value to change—do not silently retune multiple offsets to make it “fit”.

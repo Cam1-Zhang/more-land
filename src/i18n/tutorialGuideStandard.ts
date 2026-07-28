@@ -1,0 +1,195 @@
+import type { TutorialGuideStep } from './tutorialGuideTypes';
+
+/** 预女猎白 — 9 步分页教程 */
+export const TUTORIAL_GUIDE_STEPS_STANDARD: readonly TutorialGuideStep[] = [
+  {
+    id: 'goal',
+    step: 1,
+    titleZh: '游戏目标',
+    titleEn: 'Game goals',
+    bodyZh:
+      '狼人杀是「有限信息 + 发言说服」的阵营对抗。好人要把狼人票出局；狼人要隐藏身份，用夜晚刀人与白天话术拖垮好人。',
+    bodyEn:
+      'Werewolf is a hidden-role team game built on limited info and persuasion. Town exiles wolves; wolves hide, kill at night, and mislead by day.',
+    bulletsZh: [
+      '好人阵营：放逐或淘汰所有狼人即胜利。',
+      '狼人阵营：屠边——杀光所有神职，或杀光所有平民，即胜利。',
+    ],
+    bulletsEn: [
+      'Good faction: win by eliminating all werewolves.',
+      'Wolf faction: side-win — kill all gods OR all villagers.',
+    ],
+    showVillageScene: true,
+  },
+  {
+    id: 'roles',
+    step: 2,
+    titleZh: '角色介绍',
+    titleEn: 'Roles',
+    bodyZh: '【预女猎白】12 人：4 狼、预言家 / 女巫 / 猎人 / 白痴、4 平民。立绘与对局身份卡一致。',
+    bodyEn:
+      'Standard 12: 4 wolves, Seer / Witch / Hunter / Idiot, 4 villagers. Art matches in-game role cards.',
+    bulletsZh: [
+      '狼人 ×4：每晚与队友统一刀口；白天隐藏身份、误导好人。',
+      '预言家：每晚查验一人是好人面还是狼人面（仅自己知晓）。',
+      '女巫：解药、毒药各一瓶，每晚三选一使用（详见「夜晚阶段」）。',
+      '猎人：出局时（狼刀或放逐）可开枪带走一名存活玩家；被毒杀通常不能开枪。',
+      '白痴：白天放逐得票最高时可翻牌免疫一次，翻牌后失去投票权，仍可发言。',
+      '平民 ×4：无夜间技能，靠发言、逻辑与投票帮助好人阵营。',
+    ],
+    bulletsEn: [
+      'Werewolves ×4: agree on a kill each night; hide and mislead by day.',
+      'Seer: check one player each night (result private to you).',
+      'Witch: one antidote and one poison per game; see Night phase for details.',
+      'Hunter: when eliminated, may shoot one living player; usually not if poisoned.',
+      'Idiot: once per game, survive a day exile by revealing; then lose your vote.',
+      'Villagers ×4: no night power; win through speech, logic, and votes.',
+    ],
+    roleArts: ['Werewolf', 'Seer', 'Witch', 'Hunter', 'Idiot', 'Villager'],
+  },
+  {
+    id: 'flow',
+    step: 3,
+    titleZh: '游戏流程概览',
+    titleEn: 'Flow overview',
+    bodyZh: '一局循环大致如下（首夜常有警长竞选，练习局已包含）：',
+    bodyEn: 'A typical loop (sheriff election on night 1 is included in practice):',
+    bulletsZh: [
+      '① 夜晚：狼人刀人 → 预言家验人 → 女巫用药',
+      '② 天亮：公布昨夜出局（本 App 不公布死因，只说出局名单）',
+      '③ 白天：发言讨论 → 放逐投票',
+      '④ 再入夜，重复直到一方达成胜利条件',
+    ],
+    bulletsEn: [
+      '① Night: wolves kill → seer checks → witch acts',
+      '② Dawn: announced deaths (causes hidden in this app)',
+      '③ Day: speeches → exile vote',
+      '④ Next night; repeat until a side wins',
+    ],
+  },
+  {
+    id: 'night',
+    step: 4,
+    titleZh: '夜晚阶段详解',
+    titleEn: 'Night phase',
+    bodyZh: '闭眼玩家不得偷看。有行动的身份按法官播报依次睁眼（本板顺序）：',
+    bodyEn: 'Eyes closed for others. Active roles wake in this order:',
+    bulletsZh: [
+      '狼人：与队友统一刀口，选择击杀一名好人阵营玩家。',
+      '预言家：查验一名玩家是「好人面」还是「狼人面」（仅自己知晓）。',
+      '女巫：知晓本夜刀口后，三选一——① 仅用解药救刀口 ② 仅用毒药毒人 ③ 两瓶都不用；不可同夜又救又毒。',
+      '解药、毒药各限整局一次；首夜女巫本人中刀是否可自救，以 App 内法官提示为准。',
+    ],
+    bulletsEn: [
+      'Wolves: agree on one good-side kill target.',
+      'Seer: check one player (result private to you).',
+      'Witch: see tonight’s target; antidote only, poison only, or neither — not both same night.',
+      'Each potion once per game; self-save on night 1 follows in-app judge lines.',
+    ],
+    roleArts: ['Werewolf', 'Seer', 'Witch'],
+  },
+  {
+    id: 'day',
+    step: 5,
+    titleZh: '白天阶段详解',
+    titleEn: 'Day phase',
+    bodyZh: '天亮后进入白天。出局者是否还能发言，取决于是否为首夜夜间出局等因素。',
+    bodyEn: 'After dawn comes the day. Last words depend on timing (e.g. first-night deaths).',
+    bulletsZh: [
+      '遗言（若规则允许）：出局玩家最后一次公开发言。',
+      '自由讨论：存活玩家依次发言、质疑、归票。',
+      '放逐投票：票高者出局；白痴可在白天被投出时翻牌免疫一次（翻牌后失去投票权）。',
+      '出局玩家仅可观战，不能再参与放逐投票（警长相关规则见练习局提示）。',
+    ],
+    bulletsEn: [
+      'Last words (if allowed): one final public speech.',
+      'Discussion: alive players speak in turn.',
+      'Exile vote: highest votes leave; Idiot may reveal once to survive that exile (then loses vote).',
+      'Eliminated players spectate only and cannot vote in exile (sheriff rules per practice prompts).',
+    ],
+  },
+  {
+    id: 'win',
+    step: 6,
+    titleZh: '胜利条件',
+    titleEn: 'Victory',
+    bodyZh: '随时检查场上存活阵营人数是否满足下列条件：',
+    bodyEn: 'Check whether either side has met its win condition:',
+    bulletsZh: [
+      '好人胜：所有狼人出局。',
+      '狼人胜：所有神职死亡，或所有平民死亡（屠边）。',
+    ],
+    bulletsEn: [
+      'Town wins: all werewolves eliminated.',
+      'Wolves win: all gods dead OR all villagers dead.',
+    ],
+    roleArts: ['Villager', 'Werewolf'],
+  },
+  {
+    id: 'tips',
+    step: 7,
+    titleZh: '新手技巧',
+    titleEn: 'Newbie tips',
+    bodyZh: '先听懂规则，再练发言与投票——信息是慢慢攒出来的。',
+    bodyEn: 'Learn the rules first; speeches and votes come with practice.',
+    bulletsZh: [
+      '前期多听少说，别急着站边或拍身份。',
+      '注意发言前后是否矛盾，而不是单凭「像不像狼」。',
+      '神职跳身份前要想好：报什么、为何现在报、明天怎么带队。',
+      '狼人也要会「表水」：像好人一样解释自己的行为。',
+    ],
+    bulletsEn: [
+      'Listen more early; don’t rush hard claims.',
+      'Track contradictions, not just “vibes”.',
+      'Before claiming power: what, why now, and tomorrow’s plan.',
+      'Wolves need believable “town” stories too.',
+    ],
+  },
+  {
+    id: 'setup',
+    step: 8,
+    titleZh: '板子配置',
+    titleEn: 'Board setup',
+    bodyZh: '【预女猎白】标准 12 人座位示例（练习局已锁定此板）：',
+    bodyEn: 'Standard 12 sample (locked in practice):',
+    bulletsZh: [
+      '狼人 ×4',
+      '预言家 ×1 · 女巫 ×1 · 猎人 ×1 · 白痴 ×1',
+      '平民 ×4',
+    ],
+    bulletsEn: [
+      'Werewolves ×4',
+      'Seer ×1 · Witch ×1 · Hunter ×1 · Idiot ×1',
+      'Villagers ×4',
+    ],
+  },
+  {
+    id: 'terms',
+    step: 9,
+    titleZh: '常见术语',
+    titleEn: 'Common terms',
+    bodyZh: '桌游圈常用简称，听到时可以对号入座：',
+    bodyEn: 'Table slang you will hear:',
+    bulletsZh: [
+      '金水：预言家验到的好人（或自称）。',
+      '查杀：预言家验到的狼人（或自称）。',
+      '悍跳：狼人冒充神职起跳。',
+      '表水：说明自己像好人的发言。',
+      '归票：总结并引导大家投谁。',
+      '平安夜：昨夜无人出局。',
+    ],
+    bulletsEn: [
+      'Clear / gold water: claimed good check.',
+      'Wolf check: claimed wolf find.',
+      'Fake-claim: wolf pretends a power role.',
+      'Table talk: sounding like town.',
+      'Hard push: steering the exile vote.',
+      'Peaceful night: no deaths last night.',
+    ],
+  },
+];
+
+export const tutorialGuideUiStandard = {
+  zh: { headerTitle: '新手教程 · 预女猎白' },
+  en: { headerTitle: 'Tutorial · Standard 12' },
+} as const;

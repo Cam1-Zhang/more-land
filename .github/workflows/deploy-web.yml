@@ -1,0 +1,45 @@
+# Builds Expo Web with correct GitHub Pages base path (/repo-name/) and pushes dist to gh-pages branch.
+name: Deploy Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy-web-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Export static web (base path = repository name)
+        env:
+          EXPO_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+        run: npx expo export -p web
+
+      - name: SPA fallback for GitHub Pages (404 → index)
+        run: node scripts/copy-github-pages-spa-fallback.js
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true
