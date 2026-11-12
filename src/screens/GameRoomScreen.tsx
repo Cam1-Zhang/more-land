@@ -33,6 +33,8 @@ import {
   recordToMap,
   type WerewolfSessionSnapshot,
 } from '../game/werewolf/sessionSnapshot';
+import { MatchHallRoomScene } from '../components/HallRoomScene';
+import { assignHallSeats } from '../constants/hallScene';
 import { GAME_ROOM_BACKGROUND_DAY, GAME_ROOM_BACKGROUND_NIGHT } from '../constants/gameRoomSceneImages';
 import { CHARACTERS } from '../data/mockData';
 import {
@@ -415,6 +417,23 @@ async function typeTextCharByChar(
   }
   onPaint(current);
   return current;
+}
+
+const AI_VOICE_PREP_MAX_WAIT_MS = 1_200;
+
+/** Do not keep the table on "thinking" while optional TTS is slow. */
+async function settleWithin<T>(promise: Promise<T>, timeoutMs: number): Promise<T | null> {
+  let timer: ReturnType<typeof setTimeout> | null = null;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<null>((resolve) => {
+        timer = setTimeout(() => resolve(null), timeoutMs);
+      }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
 }
 
 function remainingRolesAfterHumanPick(humanRole: string, board: WerewolfGameBoard): string[] {
@@ -889,7 +908,9 @@ async function fetchSpeechSafe(
     }
   };
 
-  const retryDelaysMs = [0, 2_000, 5_000];
+  // One bounded request per turn. Repeating a timed-out speech request made a
+  // single AI player hold the table for several minutes.
+  const retryDelaysMs = [0];
   for (const delay of retryDelaysMs) {
     if (delay > 0) await new Promise((r) => setTimeout(r, delay));
     const speech = await attemptLlm();
@@ -1251,10 +1272,6 @@ export default function GameRoomScreen({ route, navigation }: any) {
 
   const sheriffTutorialAckRef = useRef<(() => void) | null>(null);
   const [sheriffTutorialVisible, setSheriffTutorialVisible] = useState(false);
-  /** 圆桌「舞台」边长（正方形，取 ringHost 宽高 min），用于座位与桌面几何 */
-  const [ringLayout, setRingLayout] = useState({ w: 320, h: 320 });
-  /** 仅记录上次 onLayout 的边长，用于忽略亚像素抖动；舞台在 ringHost 内用 flex 居中，不依赖 inset */
-  const ringLayoutCommitRef = useRef<{ w: number } | null>(null);
   const confirmSheriffTutorial = useCallback(() => {
     setSheriffTutorialVisible(false);
     const r = sheriffTutorialAckRef.current;
@@ -2407,7 +2424,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
         // Keep a visible state while this sentence's voice is being prepared.
         // This also replaces the previous sentence during inter-sentence pauses.
         setTypingText(gameCopy[lang].aiThinking);
-        const prepared = await preparedPromise;
+        const prepared = await settleWithin(preparedPromise, AI_VOICE_PREP_MAX_WAIT_MS);
         preparedPromise = bi + 1 < parts.length
           ? prepareAiUtterance(parts[bi + 1]!, voiceProfile)
           : Promise.resolve(null);
@@ -2444,7 +2461,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
           if (bi < parts.length - 1) {
             setTypingText(gameCopy[lang].aiThinking);
           }
-          await sleepInterruptible(280);
+          await sleepInterruptible(160);
           await typeTextCharByChar(
             reaction,
             typingMs,
@@ -2455,7 +2472,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
           if (bi < parts.length - 1) {
             setTypingText(gameCopy[lang].aiThinking);
           }
-          await sleepInterruptible(520);
+          await sleepInterruptible(240);
           speechSkipRequestedRef.current = false;
         }
 
@@ -2466,7 +2483,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
         }
         if (bi < parts.length - 1) {
           setTypingText(gameCopy[lang].aiThinking);
-          await sleepInterruptible(320);
+          await sleepInterruptible(160);
         }
       }
     },
@@ -2629,6 +2646,8 @@ export default function GameRoomScreen({ route, navigation }: any) {
             channel: 'discussion',
             humanPlayerName,
             priorSpeakerName,
+            alreadySpokenThisPhase: roster.slice(0, speechIdx).map((player) => player.name),
+            notYetSpokenThisPhase: roster.slice(speechIdx + 1).map((player) => player.name),
             preparedDialogue: prep,
             dayExileVotesPublic: prep?.dayExileVotesPublic ?? config.dayExileVotesPublic,
             wolfSelfRevealName,
@@ -2642,7 +2661,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
         await deliverAiSpeechBubbles(speechBubbles, p, persona, lang, char, 22);
         setTypingText('');
         setActiveSpeaker(null);
-        await sleepInterruptible(450);
+        await sleepInterruptible(180);
       } else {
         setActiveSpeaker('me');
         setTypingText(gameCopy[lang].yourTurn);
@@ -2770,7 +2789,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
           await deliverAiSpeechBubbles(lwBubbles, p, persona, lang, char, 18);
           setTypingText('');
           setActiveSpeaker(null);
-          await sleepInterruptible(400);
+          await sleepInterruptible(180);
         } else {
           setActiveSpeaker('me');
           setTypingText(
@@ -3012,7 +3031,10 @@ export default function GameRoomScreen({ route, navigation }: any) {
                 speechIndex: speechIdx,
                 totalSpeakers: candidates.length,
                 gameNonce: speechNonceRef.current,
-                priorSpeakerName: speechIdx > 0 ? candidates[speechIdx - 1] ?? null : null,
+                priorSpeakerName:
+                  speechIdx > 0
+                    ? playersRef.current.find((x) => x.id === candidates[speechIdx - 1])?.name ?? null
+                    : null,
                 priorSpeechLines: countPlayerSpeechLinesInHistory(sheriffPublicLogs),
                 accusedThisRound: false,
                 recentLogLines: sheriffObserverLogs,
@@ -3043,6 +3065,14 @@ export default function GameRoomScreen({ route, navigation }: any) {
           lang,
           humanPlayerName
         );
+        const sheriffAlreadySpokenNames = candidates
+          .slice(0, speechIdx)
+          .map((id) => playersRef.current.find((x) => x.id === id)?.name)
+          .filter((name): name is string => !!name);
+        const sheriffAlreadySpokenSet = new Set(sheriffAlreadySpokenNames);
+        const sheriffNotYetSpokenNames = aliveForSheriff
+          .filter((player) => player.id !== p.id && !sheriffAlreadySpokenSet.has(player.name))
+          .map((player) => player.name);
         const sheriffBubbles = await fetchSpeechSafe(
           speaker,
           p.role,
@@ -3057,6 +3087,8 @@ export default function GameRoomScreen({ route, navigation }: any) {
             personality: persona,
             channel: 'sheriff',
             humanPlayerName,
+            alreadySpokenThisPhase: sheriffAlreadySpokenNames,
+            notYetSpokenThisPhase: sheriffNotYetSpokenNames,
             preparedDialogue: sheriffPrep,
             gameContextBlock: sheriffGameCtx,
             focusAngleHints: sheriffFocusHints,
@@ -3067,7 +3099,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
         setTypingText('');
         setActiveSpeaker(null);
         speechIdx += 1;
-        await sleepInterruptible(400);
+        await sleepInterruptible(180);
       } else {
         setActiveSpeaker('me');
         setTypingText(lang === 'zh' ? '系统：轮到你警上发言。' : 'System: your sheriff speech.');
@@ -4395,27 +4427,6 @@ export default function GameRoomScreen({ route, navigation }: any) {
     return order.map((id) => byId.get(id)).filter((p): p is GridPlayer => p != null);
   }, [players, tableSeatOrder, meAvatarIndex]);
 
-  /** 与木桌椭圆同心略下移，贴合参考木屋透视 */
-  const ringStageCenterYOffset = useMemo(() => {
-    const minD = Math.min(ringLayout.w, ringLayout.h);
-    return minD * 0.034;
-  }, [ringLayout.w, ringLayout.h]);
-
-  const seatPositions = useMemo(() => {
-    const raw = ringSeatLayout(
-      displayPlayers.length,
-      ringLayout.w,
-      ringLayout.h,
-      ringGeom,
-      ringStageCenterYOffset
-    );
-    return raw.map((p) => ({
-      ...p,
-      left: p.left + SEAT_GLOBAL_NUDGE_X,
-      top: p.top + SEAT_GLOBAL_NUDGE_Y,
-    }));
-  }, [displayPlayers.length, ringLayout.w, ringLayout.h, ringGeom, ringStageCenterYOffset]);
-
   const topBarDayLabel = useMemo(() => {
     const n =
       phase === 'NIGHT' || phase === 'PREPARING'
@@ -4663,31 +4674,93 @@ export default function GameRoomScreen({ route, navigation }: any) {
 
   return (
     <View style={[styles.gameScreenShell, screenFillStyle, styles.containerGameShell]}>
-      <View style={styles.gameScreenBackdropWrap} pointerEvents="none">
-        <Image
-          accessibilityIgnoresInvertColors
-          source={GAME_ROOM_BACKGROUND_DAY}
-          style={[
-            PIXEL_ART_SPRITE,
-            styles.gameScreenBackdrop,
-            gameBackdropPanStyle,
-            { opacity: backdropIsNight ? 0 : 1 },
-          ]}
-          resizeMode="contain"
-        />
-        <Image
-          accessibilityIgnoresInvertColors
-          source={GAME_ROOM_BACKGROUND_NIGHT}
-          style={[
-            PIXEL_ART_SPRITE,
-            styles.gameScreenBackdrop,
-            gameBackdropPanStyle,
-            { opacity: backdropIsNight ? 1 : 0 },
-          ]}
-          resizeMode="contain"
-        />
-      </View>
+      <MatchHallRoomScene panX={backdropPanX} night={backdropIsNight}
+        seatCount={displayPlayers.length} selected={selectedId}
+        occupants={assignHallSeats(displayPlayers).map(p => {
+          const isSheriff = sheriffPlayerId === p.id && p.isAlive;
+          const wolfMate = isWolfTeam(myRole) && p.id !== 'me' && isWolfTeam(p.role) && p.isAlive;
+          const badge = phase === 'ENDED'
+            ? `${sheriffPlayerId === p.id ? '👮' : ''}${roleEmojiForRole(p.role)}`
+            : p.id === 'me' && roleCardDismissed
+              ? `${isSheriff ? '👮' : ''}${roleEmojiForRole(p.role)}`
+              : `${isSheriff ? '👮' : ''}${wolfMate ? '🐺' : ''}`;
+          const showKnives = phase === 'NIGHT' && nightSeg === 'wolves' && isWolfTeam(myRole) && p.isAlive;
+          const knives = showKnives ? (wolfPackKnifeTally[p.id] ?? 0) + (nightHumanGate && selectedId === p.id && !wolfPackKillVoteByWolfRef.current.get('me') ? 1 : 0) : 0;
+          const pop = seatStickerPop[p.id];
+          return { ...p, characterId: p.id, badge, speaking: activeSpeaker === p.id,
+            speech: activeSpeaker === p.id ? typingText : undefined,
+            stickerSource: pop && Date.now() < pop.until ? resolveStickerSource(pop.stickerId) ?? undefined : undefined,
+            tally: knives ? '🔪'.repeat(knives) : undefined };
+        })}
+        renderHuman={mePixelAvatar ? (width, facing) => <PixelAvatarSprite config={mePixelAvatar} size={width} pose="seated" facing={facing} transforms={mePixelAvatarTransforms} /> : undefined}
+        onSeatPress={seatId => {
+          const p = assignHallSeats(displayPlayers).find(player => player.seatId === seatId);
+          if (!p) return;
+          if (!p.isAlive) return;
+          if (hunterShotMode) {
+            setSelectedId(p.id);
+            return;
+          }
+          if (phase === 'KNIGHT_DUEL' && knightDuelMode && p.id !== 'me') {
+            setSelectedId(p.id);
+            return;
+          }
+          if (phase === 'VOTING') {
+            const meVote = playersRef.current.find((x) => x.id === 'me');
+            if (
+              meVote?.isAlive &&
+              meVote.canVote !== false &&
+              !hunterShotMode
+            ) {
+              setSelectedId(p.id);
+            }
+            return;
+          }
+          if (
+            phase === 'SHERIFF_VOTE' &&
+            sheriffVoteInteractive &&
+            sheriffCandidatesState.includes(p.id)
+          ) {
+            setSelectedId(p.id);
+            return;
+          }
+          if (phase === 'NIGHT' && nightSeg && nightHumanGate) {
+            if (nightSeg === 'guard' && myRole === 'Guard') {
+              const lastGuard = guardLastTargetRef.current?.id;
+              if (lastGuard && p.id === lastGuard) return;
+              setSelectedId(p.id);
+              return;
+            }
+            if (nightSeg === 'wolves' && isWolfTeam(myRole) && p.id !== 'me') {
+              setSelectedId(p.id);
+              return;
+            }
+            if (
+              nightSeg === 'wolf_beauty' &&
+              myRole === 'WolfBeauty' &&
+              p.id !== 'me' &&
+              !isWolfTeam(p.role)
+            ) {
+              setSelectedId(p.id);
+              return;
+            }
+            if (nightSeg === 'seer' && myRole === 'Seer' && p.id !== 'me') {
+              setSelectedId(p.id);
+              return;
+            }
+            if (
+              nightSeg === 'witch' &&
+              myRole === 'Witch' &&
+              p.id !== 'me' &&
+              witchPoisonPickMode
+            ) {
+              setSelectedId(p.id);
+              return;
+            }
+          }
+        }} />
       <KeyboardAvoidingView
+        pointerEvents="box-none"
         style={[
           styles.flex,
           {
@@ -4700,9 +4773,9 @@ export default function GameRoomScreen({ route, navigation }: any) {
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >
-          <View style={styles.gameSceneOverlay}>
-            <View style={styles.gameMainRow}>
-              <View style={styles.gameLeftColumn}>
+          <View pointerEvents="box-none" style={styles.gameSceneOverlay}>
+            <View pointerEvents="box-none" style={styles.gameMainRow}>
+              <View pointerEvents="box-none" style={styles.gameLeftColumn}>
             <View style={styles.gameTopBarWrap}>
               <View style={styles.topBarRow}>
                 <View style={styles.topBarSideRail}>
@@ -4743,336 +4816,7 @@ export default function GameRoomScreen({ route, navigation }: any) {
               </View>
             </View>
 
-          <View style={styles.ringColumn}>
-            <View
-              style={styles.ringHost}
-              onLayout={(e) => {
-                const { width, height } = e.nativeEvent.layout;
-                if (width <= 0 || height <= 0) return;
-                const side = Math.floor(Math.min(width, height));
-                if (side < 160) return;
-                const prev = ringLayoutCommitRef.current;
-                const approxEq = (a: number, b: number) => Math.abs(a - b) < 2;
-                if (prev != null && approxEq(prev.w, side)) return;
-                ringLayoutCommitRef.current = { w: side };
-                setRingLayout({ w: side, h: side });
-              }}
-            >
-              <View
-                pointerEvents="box-none"
-                style={[
-                  styles.ringArenaStage,
-                  {
-                    width: ringLayout.w,
-                    height: ringLayout.h,
-                  },
-                ]}
-              >
-              {displayPlayers.map((p, idx) => {
-                const pos = seatPositions[idx] ?? { left: 0, top: 0, nudgeY: 0 };
-                const topY = pos.top + (pos.nudgeY ?? 0);
-                const seatSlotNo = idx + 1;
-                const showWolfKnifeTallyUi =
-                  phase === 'NIGHT' &&
-                  nightSeg === 'wolves' &&
-                  isWolfTeam(myRole) &&
-                  p.isAlive;
-                let packKnifeCount = showWolfKnifeTallyUi ? wolfPackKnifeTally[p.id] ?? 0 : 0;
-                /** 人类尚未点确认时，ref 里还没有「me」，把当前选中目标也算进 🔪 预览 */
-                if (
-                  showWolfKnifeTallyUi &&
-                  nightHumanGate &&
-                  selectedId === p.id &&
-                  !wolfPackKillVoteByWolfRef.current.get('me')
-                ) {
-                  packKnifeCount += 1;
-                }
-                const showWolfMate =
-                  isWolfTeam(myRole) && p.id !== 'me' && isWolfTeam(p.role) && p.isAlive;
-                const pop = seatStickerPop[p.id];
-                const showSeatStickerBubble =
-                  !!pop && Date.now() < pop.until && resolveStickerSource(pop.stickerId);
-                const bw = sceneSeatMetrics.bodyW;
-                const bh = sceneSeatMetrics.bodyH;
-                const outer = Math.round(bw + 12);
-                const goldBox = Math.max(2, outer - 8);
-                const selectionRingSize = outer + 8;
-                const showYellowSelection = selectedId === p.id;
-                const seatZ =
-                  activeSpeaker === p.id ? 10000 : showSeatStickerBubble ? 9000 : 4;
-                return (
-                  <View
-                    key={p.id}
-                    pointerEvents="box-none"
-                    style={[
-                      styles.playerSeatRing,
-                      {
-                        left: pos.left,
-                        top: topY,
-                        width: ringGeom.slotW,
-                        minHeight: ringGeom.slotH,
-                        zIndex: seatZ,
-                      },
-                    ]}
-                  >
-                    {(() => {
-                      const isSheriff = sheriffPlayerId === p.id && p.isAlive;
-                      if (phase === 'ENDED') {
-                        const roleEm = roleEmojiForRole(p.role);
-                        const wasSheriff = sheriffPlayerId === p.id;
-                        return (
-                          <Text style={styles.roleEmojiTop} accessibilityLabel={p.role}>
-                            {wasSheriff ? `👮${roleEm}` : roleEm}
-                          </Text>
-                        );
-                      }
-                      if (p.id === 'me' && roleCardDismissed) {
-                        const roleEm = roleEmojiForRole(p.role);
-                        return (
-                          <Text style={styles.roleEmojiTop} accessibilityLabel={p.role}>
-                            {isSheriff ? `👮${roleEm}` : roleEm}
-                          </Text>
-                        );
-                      }
-                      if (showWolfMate && isSheriff) {
-                        return (
-                          <Text style={styles.wolfMateMark} accessibilityLabel="Sheriff wolf teammate">
-                            👮🐺
-                          </Text>
-                        );
-                      }
-                      if (showWolfMate) {
-                        return (
-                          <Text style={styles.wolfMateMark} accessibilityLabel="Wolf teammate">
-                            🐺
-                          </Text>
-                        );
-                      }
-                      if (isSheriff) {
-                        return (
-                          <Text style={styles.roleEmojiTop} accessibilityLabel="Sheriff">
-                            👮
-                          </Text>
-                        );
-                      }
-                      return <View style={styles.wolfMateSpacer} />;
-                    })()}
-                    <View style={styles.sceneCharacterColumn} pointerEvents="box-none">
-                      <TouchableOpacity
-                        style={[styles.sceneCharacterHit, sceneSeatMetrics.hit]}
-                        activeOpacity={0.8}
-                        hitSlop={{ top: 18, bottom: 12, left: 12, right: 20 }}
-                        onPress={() => {
-                          if (!p.isAlive) return;
-                          if (hunterShotMode) {
-                            setSelectedId(p.id);
-                            return;
-                          }
-                          if (phase === 'KNIGHT_DUEL' && knightDuelMode && p.id !== 'me') {
-                            setSelectedId(p.id);
-                            return;
-                          }
-                          if (phase === 'VOTING') {
-                            const meVote = playersRef.current.find((x) => x.id === 'me');
-                            if (
-                              meVote?.isAlive &&
-                              meVote.canVote !== false &&
-                              !hunterShotMode
-                            ) {
-                              setSelectedId(p.id);
-                            }
-                            return;
-                          }
-                          if (
-                            phase === 'SHERIFF_VOTE' &&
-                            sheriffVoteInteractive &&
-                            sheriffCandidatesState.includes(p.id)
-                          ) {
-                            setSelectedId(p.id);
-                            return;
-                          }
-                          if (phase === 'NIGHT' && nightSeg && nightHumanGate) {
-                            if (nightSeg === 'guard' && myRole === 'Guard') {
-                              const lastGuard = guardLastTargetRef.current?.id;
-                              if (lastGuard && p.id === lastGuard) return;
-                              setSelectedId(p.id);
-                              return;
-                            }
-                            if (nightSeg === 'wolves' && isWolfTeam(myRole) && p.id !== 'me') {
-                              setSelectedId(p.id);
-                              return;
-                            }
-                            if (
-                              nightSeg === 'wolf_beauty' &&
-                              myRole === 'WolfBeauty' &&
-                              p.id !== 'me' &&
-                              !isWolfTeam(p.role)
-                            ) {
-                              setSelectedId(p.id);
-                              return;
-                            }
-                            if (nightSeg === 'seer' && myRole === 'Seer' && p.id !== 'me') {
-                              setSelectedId(p.id);
-                              return;
-                            }
-                            if (
-                              nightSeg === 'witch' &&
-                              myRole === 'Witch' &&
-                              p.id !== 'me' &&
-                              witchPoisonPickMode
-                            ) {
-                              setSelectedId(p.id);
-                              return;
-                            }
-                          }
-                        }}
-                      >
-                        {showSeatStickerBubble ? (
-                          <View style={styles.seatStickerBubble} pointerEvents="none">
-                            <Image
-                              source={resolveStickerSource(pop!.stickerId)!}
-                              style={[PIXEL_ART_SPRITE, styles.seatStickerImg]}
-                              resizeMode="contain"
-                            />
-                          </View>
-                        ) : null}
-                        <View style={styles.portraitSlotWrap}>
-                          <View style={styles.seatSlotNumberBadge} pointerEvents="none">
-                            <View style={styles.seatSlotNumberBadgeInset}>
-                              <Text style={styles.seatSlotNumberBadgeText}>{seatSlotNo}</Text>
-                            </View>
-                          </View>
-                          <Animated.View
-                            style={[
-                              styles.sceneCharacterAnim,
-                              activeSpeaker === p.id
-                                ? { opacity: breathOpacity }
-                                : { opacity: 1 },
-                            ]}
-                          >
-                            <View
-                              style={[
-                                styles.portraitWoodOuter,
-                                {
-                                  width: outer,
-                                  height: outer,
-                                  borderRadius: Math.floor(outer / 2),
-                                },
-                              ]}
-                            >
-                              <View
-                                style={[
-                                  styles.portraitGoldRing,
-                                  {
-                                    width: goldBox,
-                                    height: goldBox,
-                                    borderRadius: Math.floor(goldBox / 2),
-                                  },
-                                ]}
-                              >
-                                <View
-                                  style={[
-                                    styles.portraitFaceClip,
-                                    styles.portraitFaceClipBust,
-                                    {
-                                      width: bw,
-                                      height: bh,
-                                      borderRadius: Math.floor(bw / 2),
-                                    },
-                                  ]}
-                                  collapsable={false}
-                                  renderToHardwareTextureAndroid={false}
-                                >
-                                  {p.isAI ? (
-                                    <BodyPortraitImage
-                                      source={p.avatarSource}
-                                      showStandGrass={false}
-                                      style={{
-                                        width: sceneSeatMetrics.aiPortraitDrawW,
-                                        height: sceneSeatMetrics.aiPortraitDrawH,
-                                        alignSelf: 'center',
-                                        marginTop: sceneSeatMetrics.aiPortraitMarginTop,
-                                      }}
-                                      resizeMode="contain"
-                                    />
-                                  ) : (
-                                    mePixelAvatar ? (
-                                      <PixelAvatarSprite
-                                        config={mePixelAvatar}
-                                        size={Math.max(24, Math.floor(Math.min(bw, bh / 1.5)))}
-                                        transforms={mePixelAvatarTransforms}
-                                      />
-                                    ) : (
-                                      <Image
-                                        source={p.avatarSource}
-                                        style={[
-                                          PIXEL_ART_SPRITE,
-                                          styles.sceneCharacterSprite,
-                                          { width: bw, height: bh },
-                                        ]}
-                                        resizeMode="contain"
-                                      />
-                                    )
-                                  )}
-                                  {!p.isAlive && (
-                                    <View style={styles.deathOverlay}>
-                                      <X color="#FFF" size={22} strokeWidth={3} />
-                                    </View>
-                                  )}
-                                </View>
-                              </View>
-                            </View>
-                          </Animated.View>
-                          {showYellowSelection ? (
-                            <View
-                              pointerEvents="none"
-                              style={[
-                                styles.seatSelectionRing,
-                                {
-                                  width: selectionRingSize,
-                                  height: selectionRingSize,
-                                  borderRadius: Math.floor(selectionRingSize / 2),
-                                  marginLeft: -Math.round(selectionRingSize / 2),
-                                  marginTop: -Math.round(selectionRingSize / 2),
-                                },
-                              ]}
-                            />
-                          ) : null}
-                        </View>
-                        <View
-                          style={[
-                            styles.playerNamePlate,
-                            { maxWidth: sceneSeatMetrics.namePlateMaxW },
-                          ]}
-                        >
-                          <Text
-                            style={[styles.playerNamePlateText, !p.isAlive && styles.deadText]}
-                            numberOfLines={1}
-                          >
-                            {p.name}
-                          </Text>
-                        </View>
-                        <View style={styles.knifeMarksCell}>
-                          {packKnifeCount > 0 ? (
-                            <Text style={styles.knifeMarks} numberOfLines={1}>
-                              {'🔪'.repeat(packKnifeCount)}
-                            </Text>
-                          ) : null}
-                        </View>
-                      </TouchableOpacity>
-                    </View>
-                    {activeSpeaker === p.id && typingText.length > 0 ? (
-                      <View style={styles.bubble} pointerEvents="none">
-                        <Text style={styles.bubbleText}>{typingText}</Text>
-                        <View style={styles.bubbleArrow} />
-                      </View>
-                    ) : null}
-                  </View>
-                );
-              })}
-            </View>
-          </View>
-        </View>
+          <View pointerEvents="none" style={styles.ringColumn} />
               </View>
 
           <View style={styles.actionColumn}>
@@ -6122,8 +5866,8 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
     minHeight: 200,
-    marginHorizontal: 4,
-    marginVertical: 6,
+    marginHorizontal: 0,
+    marginVertical: 0,
     width: '100%',
     alignSelf: 'stretch',
     /** 允许右侧座位（如 4 号）木框略超出正方形舞台，落在 host 左右留白区 */

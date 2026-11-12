@@ -1,0 +1,967 @@
+{
+  "households": [
+    {
+      "id": "frankFamilyHome",
+      "name": "榛木老宅",
+      "district": "westLane",
+      "residents": [
+        "Frank",
+        "Gary",
+        "Sofia",
+        "Daisy"
+      ],
+      "kind": "family",
+      "relations": "Frank是Gary的父亲、Daisy的祖父；Gary与Sofia是夫妻；Daisy是Gary与Sofia的女儿。",
+      "reason": "Frank年纪渐长后与儿子一家同住。Gary负责大部分重活，Sofia管理日常起居，Daisy仍在家中生活。这里是自然的三代家庭住宅。",
+      "interior": "一层是旧式厨房、壁炉起居室和Frank的小卧室；Gary与Sofia的卧室在二层东侧，Daisy有自己的阁楼卧室。后门连接家庭工具棚和小菜园。Frank维修水渠使用的工具棚明确属于这户住宅，不是无人建筑。",
+      "doorLabel": "Frank & Gary家"
+    },
+    {
+      "id": "hankFamilyHome",
+      "name": "风车檐屋",
+      "district": "neighborhood",
+      "residents": [
+        "Hank",
+        "Chloe",
+        "Toby"
+      ],
+      "kind": "family",
+      "relations": "Hank是Chloe和Toby的父亲；Chloe是Toby的姐姐。",
+      "reason": "两个成年子女仍和父亲住在祖宅。Chloe经济和生活都已经独立，只是没有特别理由搬走；Toby年纪更小，也更依赖熟悉的家庭环境。",
+      "interior": "正门进入家庭客厅，旁边是开放式厨房。Hank住一层，Chloe和Toby各有二层独立卧室。Chloe房间堆满便签和奇怪小物，Toby房间布置简单且很整齐。",
+      "doorLabel": "Hank家"
+    },
+    {
+      "id": "moriFamilyHome",
+      "name": "北坡观星宅",
+      "district": "highlands",
+      "residents": [
+        "Prof. Mori",
+        "Ada",
+        "Luna"
+      ],
+      "kind": "family",
+      "relations": "Prof. Mori是Ada和Luna的父亲；Ada是Luna的姐姐。",
+      "reason": "Mori原本就住在靠近旧天文台的位置。Ada成年后仍把这里作为长期住所，Luna也尚未离家，三人各有自己的空间。",
+      "interior": "石砌厨房与书房相连，Mori有一间堆满旧图纸的独立书房兼卧室；Ada的房间有资料板和整齐文件柜；Luna的房间挂满风铃、玻璃片和毫无规律的小装饰。屋顶有一处私人观星平台。",
+      "doorLabel": "Mori家"
+    },
+    {
+      "id": "kasparFamilyHome",
+      "name": "棋盘石屋",
+      "district": "forest",
+      "residents": [
+        "Kaspar",
+        "Zack",
+        "Rose"
+      ],
+      "kind": "family",
+      "relations": "Kaspar是Zack和Rose的父亲；Zack是Rose的哥哥。",
+      "reason": "兄妹都已经成年，但这里一直是他们的家庭住宅。Zack经常在外活动，Rose更喜欢附近的林缘环境，两人都没有急着搬离。",
+      "interior": "中央起居室放着Kaspar长期使用的棋桌；厨房在西侧；Kaspar、Zack、Rose分别有独立卧室。Rose窗外有香草架，Zack的门边挂着外出装备。",
+      "doorLabel": "Kaspar家"
+    },
+    {
+      "id": "socratesFamilyHome",
+      "name": "白石问答屋",
+      "district": "square",
+      "residents": [
+        "Socrates",
+        "Rita",
+        "Ben"
+      ],
+      "kind": "family",
+      "relations": "Socrates是Rita和Ben的父亲；Rita是Ben的姐姐。",
+      "reason": "Rita与Ben都已成年，但家庭住宅就在广场附近，生活方便。三个人性格差异很大，因此各自有明确私人空间，平时并不会一直黏在一起。",
+      "interior": "有完整家庭厨房和小餐厅。Socrates喜欢在书房见人，Rita房间有分类严密的柜子，Ben的工作台靠后院。三个卧室彼此独立。",
+      "doorLabel": "Socrates家"
+    },
+    {
+      "id": "justiceFamilyHome",
+      "name": "蓝窗宅",
+      "district": "neighborhood",
+      "residents": [
+        "Justice",
+        "Alice",
+        "Lily"
+      ],
+      "kind": "family",
+      "relations": "Justice是Alice和Lily的母亲；Alice是Lily的姐姐。",
+      "reason": "Alice和Lily仍住在母亲的房子里。Alice觉得搬家会打乱自己全部记录系统，Lily则一直没有真正决定过要不要搬。",
+      "interior": "整洁的家庭厨房、客厅和后院洗衣区。Justice卧室最简洁；Alice房间有大量笔记本和纸张；Lily的房间看似凌乱，但有自己的生活痕迹。",
+      "doorLabel": "Justice家"
+    },
+    {
+      "id": "oldFoxFamilyHome",
+      "name": "赤尾坡屋",
+      "district": "riverside",
+      "residents": [
+        "Old Fox",
+        "Dante",
+        "Mia"
+      ],
+      "kind": "family",
+      "relations": "Old Fox是Dante和Mia的父亲；Dante是Mia的哥哥。",
+      "reason": "兄妹都保留这里作为正式住所。Dante经常晚归，Mia更常在家。Old Fox并不干涉两个成年子女的生活，因此家庭关系相对松散。",
+      "interior": "临河客厅带长窗，厨房较旧但使用频繁。Old Fox住一层，Dante和Mia分别拥有二层房间；Dante房内有牌和各种赌局小物，Mia房间更温暖、堆着送给别人的东西。",
+      "doorLabel": "Old Fox家"
+    },
+    {
+      "id": "noraFamilyHome",
+      "name": "常青门宅",
+      "district": "neighborhood",
+      "residents": [
+        "Nora",
+        "Jack"
+      ],
+      "kind": "family",
+      "relations": "Nora是Jack的母亲。",
+      "reason": "Jack虽然成年，但一直住在家里。Nora完全能压住他的脾气，因此他们的家庭互动会很有辨识度。",
+      "interior": "一层厨房和客厅宽敞结实，家具用了很多年。Nora住一层后侧房间，Jack拥有楼上的独立卧室和小阳台。",
+      "doorLabel": "Nora & Jack家"
+    },
+    {
+      "id": "victorFamilyHome",
+      "name": "金狮宅",
+      "district": "square",
+      "residents": [
+        "Victor",
+        "Momo"
+      ],
+      "kind": "family",
+      "relations": "Victor是Momo的父亲。",
+      "reason": "Momo仍和父亲生活。Victor性格强势，但在家庭生活中习惯替Momo处理很多事情，这也部分解释了Momo为什么对别人较容易信任。",
+      "interior": "前厅稍显正式，真正的家庭空间在后侧厨房和小客厅。Victor与Momo分别有独立卧室；Momo有自己的烘焙台和装满杯子的柜子。",
+      "doorLabel": "Victor家"
+    },
+    {
+      "id": "peterHome",
+      "name": "水杉小屋",
+      "district": "forest",
+      "residents": [
+        "Peter"
+      ],
+      "kind": "solo",
+      "relations": "Peter独居。Peter的父亲属于上一代守谷会成员，但不是本户现居角色。",
+      "reason": "Peter45岁，有能力独立生活，也更喜欢安静。他的房子靠近森林，却刻意与旧水渠入口保持一定距离。",
+      "interior": "小厨房、小客厅、一间卧室和储物房。父亲留下的少量旧工具被整齐锁在储物柜中，但不会出现把Peter本人误写成旧守谷会成员的内容。",
+      "doorLabel": "Peter"
+    },
+    {
+      "id": "widowHome",
+      "name": "暮藤屋",
+      "district": "neighborhood",
+      "residents": [
+        "Widow"
+      ],
+      "kind": "solo",
+      "relations": "Widow独居；她已故的丈夫曾是守谷会成员。",
+      "reason": "这里一直是她自己的家。丈夫去世后，她选择继续生活在原住宅，并保留部分丈夫留下的物品，不需要给她安排新的伴侣。",
+      "interior": "厨房仍正常使用，客厅优雅但不华丽。Widow有自己的卧室；另有一间上锁的小储藏室保存丈夫留下的箱子、旧地图和维修记录。",
+      "doorLabel": "Widow"
+    },
+    {
+      "id": "ghostHome",
+      "name": "铃影小屋",
+      "district": "riverside",
+      "residents": [
+        "Ghost"
+      ],
+      "kind": "solo",
+      "relations": "Ghost独自拥有这处归所，没有现任伴侣。",
+      "reason": "Ghost不需要睡眠和饮食，但社区仍承认TA是居民，因此TA拥有一个正式地址。这里是TA主动选择使用的空间，不代表TA需要像活人一样生活。",
+      "interior": "没有厨房需求，也没有传统床铺。室内只有一张桌子、两把椅子、书架、旧物柜和朝向河面的窗。角落放着居民多年送给Ghost的东西。玩家关系提高后可在这里触发私人事件。",
+      "doorLabel": "Ghost"
+    },
+    {
+      "id": "godEyeHome",
+      "name": "全景屋",
+      "district": "highlands",
+      "residents": [
+        "God Eye"
+      ],
+      "kind": "solo",
+      "relations": "God Eye独居，没有现任伴侣。",
+      "reason": "God Eye喜欢拥有可以独立观察、整理信息而不受打扰的空间，因此成年后选择独居。",
+      "interior": "一室一厅式住宅，但不是宿舍单间：有完整厨房、起居区、卧室和工作室。最大特色是一整面谷地图墙以及可以看到多个区域的高窗。",
+      "doorLabel": "God Eye"
+    },
+    {
+      "id": "devinIvyHome",
+      "name": "榆叶兄妹宅",
+      "district": "westLane",
+      "residents": [
+        "Devin",
+        "Ivy"
+      ],
+      "kind": "family",
+      "relations": "Devin是Ivy的哥哥。",
+      "reason": "兄妹共同继承并继续住在原来的家庭住宅。两人工作方式都偏细致，因此共同生活没有太大冲突。",
+      "interior": "完整厨房和小餐厅位于中央，两侧各有一间独立卧室和工作角。Devin的路线图贴得很规整，Ivy则有一块专门记录日期和细节的小板。",
+      "doorLabel": "Devin & Ivy"
+    },
+    {
+      "id": "sarahJulianHome",
+      "name": "冬青宅",
+      "district": "neighborhood",
+      "residents": [
+        "Sarah",
+        "Julian"
+      ],
+      "kind": "family",
+      "relations": "Sarah与Julian是夫妻。",
+      "reason": "两人性格互补：Sarah重规则，Julian擅长处理人际关系。婚姻并不改变各自核心性格，也不会让他们在游戏里总成对出现。",
+      "interior": "共同厨房和餐厅十分整洁。两人共用主卧，但Sarah有自己的规则文件柜，Julian有独立会客角。后院有一张经常被邻居占用的长桌。",
+      "doorLabel": "Sarah & Julian"
+    },
+    {
+      "id": "mikeClaraHome",
+      "name": "榆灯宅",
+      "district": "square",
+      "residents": [
+        "Mike",
+        "Clara"
+      ],
+      "kind": "family",
+      "relations": "Mike与Clara是夫妻。",
+      "reason": "Mike爱组织别人，Clara善于看模式，两人在日常生活中经常对同一件事得出不同判断，但并非严重冲突。",
+      "interior": "厨房连接起居室；墙边有Mike写活动安排的板子和Clara记录规律的纸卷。两人共享卧室，另有一间各用一半的工作房。",
+      "doorLabel": "Mike & Clara"
+    },
+    {
+      "id": "oscarJillHome",
+      "name": "红檐屋",
+      "district": "riverside",
+      "residents": [
+        "Oscar",
+        "Jill"
+      ],
+      "kind": "family",
+      "relations": "Oscar与Jill是夫妻。",
+      "reason": "两个人都喜欢把普通日子弄得更有趣。Jill经常提出奇怪方案，Oscar负责把方案说得听起来像真的可行。",
+      "interior": "开放厨房、色彩杂乱的客厅和共同卧室。另有一个小工作间，里面堆着Jill失败的实验和Oscar用于表演、游戏的道具。",
+      "doorLabel": "Oscar & Jill"
+    },
+    {
+      "id": "mageElenaHome",
+      "name": "紫藤门宅",
+      "district": "forest",
+      "residents": [
+        "Mage",
+        "Elena"
+      ],
+      "kind": "family",
+      "relations": "Mage与Elena是夫妻。",
+      "reason": "Mage喜欢故弄玄虚，Elena非常清楚语言怎样影响别人，因此她通常知道Mage什么时候是在认真、什么时候只是在胡说。",
+      "interior": "普通厨房和家庭客厅之外，有一间Mage摆满牌、蜡烛和奇怪物件的小房间；Elena拥有独立阅读与写作空间。两人共用卧室。",
+      "doorLabel": "Mage & Elena"
+    },
+    {
+      "id": "vesperXanderHome",
+      "name": "黑栎兄妹宅",
+      "district": "bridge",
+      "residents": [
+        "Vesper",
+        "Xander"
+      ],
+      "kind": "family",
+      "relations": "Vesper是Xander的姐姐。",
+      "reason": "两人都是行动力很强的人，成年后仍共同保留一处家庭住宅，但日程独立，很少整天待在一起。",
+      "interior": "一楼是厨房、简洁客厅和装备储藏区；二楼两个完全独立的卧室。Vesper房间极整齐，Xander的装备则永远放在最顺手的位置。",
+      "doorLabel": "Vesper & Xander"
+    },
+    {
+      "id": "tomBrothersHome",
+      "name": "三橡树屋",
+      "district": "riverside",
+      "residents": [
+        "Tom",
+        "Leo",
+        "Sam"
+      ],
+      "kind": "family",
+      "relations": "Tom、Leo、Sam是三兄弟，年龄顺序为Tom、Leo、Sam。",
+      "reason": "三兄弟都已成年，但保留共同的家庭住宅。Tom最在意自己的位置，Leo经常调停，Sam则不断制造新的麻烦，因此家庭互动非常自然。",
+      "interior": "一层有大厨房和家庭客厅，墙上还留着三人年轻时的痕迹。二层三间独立卧室，不共用睡眠空间。Sam的房间最乱，Leo最中性，Tom最强调自己的东西不能被碰。",
+      "doorLabel": "Tom / Leo / Sam"
+    },
+    {
+      "id": "frostHome",
+      "name": "霜石屋",
+      "district": "highlands",
+      "residents": [
+        "Frost"
+      ],
+      "kind": "solo",
+      "relations": "Frost独居。",
+      "reason": "Frost需要安静和高度私人空间，独居最符合他的生活方式，不需要额外制造家庭悲剧解释。",
+      "interior": "完整的小厨房、客厅、卧室和书房。屋内装饰极少，窗边只有一把观察北坡天气的椅子。",
+      "doorLabel": "Frost"
+    },
+    {
+      "id": "kaiserHome",
+      "name": "铁门宅",
+      "district": "bridge",
+      "residents": [
+        "Kaiser"
+      ],
+      "kind": "solo",
+      "relations": "Kaiser独居。",
+      "reason": "Kaiser45岁且性格极强势，自己拥有住宅比强行安排室友或家庭成员更自然。",
+      "interior": "布局非常明确：门厅、厨房、起居室、卧室和训练空间。家具位置几乎从不改变。",
+      "doorLabel": "Kaiser"
+    },
+    {
+      "id": "ambassadorHome",
+      "name": "白栏宅",
+      "district": "square",
+      "residents": [
+        "Ambassador"
+      ],
+      "kind": "solo",
+      "relations": "Ambassador独居。",
+      "reason": "Ambassador40岁，有成熟独立的生活方式。房子离广场近，方便居民遇到矛盾时来找他。",
+      "interior": "前部有适合谈话的小客厅，后部才是私人厨房、餐区、卧室和书房。住宅与公共办公场所明显区分。",
+      "doorLabel": "Ambassador"
+    }
+  ],
+  "familyLinks": [
+    {
+      "a": "Frank",
+      "b": "Gary",
+      "relation": "父子，Frank为父、Gary为子",
+      "new": true,
+      "note": "Frank 68，Gary 42，年龄差26岁，合理。"
+    },
+    {
+      "a": "Gary",
+      "b": "Sofia",
+      "relation": "夫妻",
+      "new": true,
+      "note": "Gary 42，Sofia 39。"
+    },
+    {
+      "a": "Gary",
+      "b": "Daisy",
+      "relation": "父女，Gary为父、Daisy为女",
+      "new": true,
+      "note": "Gary在Daisy出生时24岁。"
+    },
+    {
+      "a": "Sofia",
+      "b": "Daisy",
+      "relation": "母女，Sofia为母、Daisy为女",
+      "new": true,
+      "note": "Sofia在Daisy出生时21岁。"
+    },
+    {
+      "a": "Frank",
+      "b": "Daisy",
+      "relation": "祖孙，Frank为祖父、Daisy为孙女",
+      "new": true,
+      "note": "由Frank—Gary父子关系自然成立。"
+    },
+    {
+      "a": "Hank",
+      "b": "Chloe",
+      "relation": "父女，Hank为父、Chloe为女",
+      "new": true,
+      "note": "Hank在Chloe出生时31岁。"
+    },
+    {
+      "a": "Hank",
+      "b": "Toby",
+      "relation": "父子，Hank为父、Toby为子",
+      "new": true,
+      "note": "Hank在Toby出生时39岁。"
+    },
+    {
+      "a": "Chloe",
+      "b": "Toby",
+      "relation": "姐弟，Chloe为姐、Toby为弟",
+      "new": true,
+      "note": "两人年龄相差8岁。"
+    },
+    {
+      "a": "Prof. Mori",
+      "b": "Ada",
+      "relation": "父女，Prof. Mori为父、Ada为女",
+      "new": true,
+      "note": "Mori在Ada出生时31岁。"
+    },
+    {
+      "a": "Prof. Mori",
+      "b": "Luna",
+      "relation": "父女，Prof. Mori为父、Luna为女",
+      "new": true,
+      "note": "Mori在Luna出生时39岁。"
+    },
+    {
+      "a": "Ada",
+      "b": "Luna",
+      "relation": "姐妹，Ada为姐、Luna为妹",
+      "new": true,
+      "note": "两人相差8岁。"
+    },
+    {
+      "a": "Kaspar",
+      "b": "Zack",
+      "relation": "父子，Kaspar为父、Zack为子",
+      "new": true,
+      "note": "Kaspar在Zack出生时31岁。"
+    },
+    {
+      "a": "Kaspar",
+      "b": "Rose",
+      "relation": "父女，Kaspar为父、Rose为女",
+      "new": true,
+      "note": "Kaspar在Rose出生时32岁。"
+    },
+    {
+      "a": "Zack",
+      "b": "Rose",
+      "relation": "兄妹，Zack为兄、Rose为妹",
+      "new": true,
+      "note": "年龄相差1岁。"
+    },
+    {
+      "a": "Socrates",
+      "b": "Rita",
+      "relation": "父女，Socrates为父、Rita为女",
+      "new": true,
+      "note": "Socrates在Rita出生时30岁。"
+    },
+    {
+      "a": "Socrates",
+      "b": "Ben",
+      "relation": "父子，Socrates为父、Ben为子",
+      "new": true,
+      "note": "Socrates在Ben出生时35岁。"
+    },
+    {
+      "a": "Rita",
+      "b": "Ben",
+      "relation": "姐弟，Rita为姐、Ben为弟",
+      "new": true,
+      "note": "年龄相差5岁。"
+    },
+    {
+      "a": "Justice",
+      "b": "Alice",
+      "relation": "母女，Justice为母、Alice为女",
+      "new": true,
+      "note": "Justice在Alice出生时24岁。"
+    },
+    {
+      "a": "Justice",
+      "b": "Lily",
+      "relation": "母女，Justice为母、Lily为女",
+      "new": true,
+      "note": "Justice在Lily出生时29岁。"
+    },
+    {
+      "a": "Alice",
+      "b": "Lily",
+      "relation": "姐妹，Alice为姐、Lily为妹",
+      "new": true,
+      "note": "年龄相差5岁。"
+    },
+    {
+      "a": "Old Fox",
+      "b": "Dante",
+      "relation": "父子，Old Fox为父、Dante为子",
+      "new": true,
+      "note": "Old Fox在Dante出生时23岁。"
+    },
+    {
+      "a": "Old Fox",
+      "b": "Mia",
+      "relation": "父女，Old Fox为父、Mia为女",
+      "new": true,
+      "note": "Old Fox在Mia出生时30岁。"
+    },
+    {
+      "a": "Dante",
+      "b": "Mia",
+      "relation": "兄妹，Dante为兄、Mia为妹",
+      "new": true,
+      "note": "年龄相差7岁。"
+    },
+    {
+      "a": "Nora",
+      "b": "Jack",
+      "relation": "母子，Nora为母、Jack为子",
+      "new": true,
+      "note": "Nora在Jack出生时26岁。"
+    },
+    {
+      "a": "Victor",
+      "b": "Momo",
+      "relation": "父女，Victor为父、Momo为女",
+      "new": true,
+      "note": "Victor在Momo出生时24岁。"
+    },
+    {
+      "a": "Devin",
+      "b": "Ivy",
+      "relation": "兄妹，Devin为兄、Ivy为妹",
+      "new": true,
+      "note": "年龄相差3岁。"
+    },
+    {
+      "a": "Sarah",
+      "b": "Julian",
+      "relation": "夫妻",
+      "new": true,
+      "note": "Sarah 35，Julian 34；二人均不是当前恋爱候选。"
+    },
+    {
+      "a": "Mike",
+      "b": "Clara",
+      "relation": "夫妻",
+      "new": true,
+      "note": "Mike与Clara均31岁；二人均不是当前恋爱候选。"
+    },
+    {
+      "a": "Oscar",
+      "b": "Jill",
+      "relation": "夫妻",
+      "new": true,
+      "note": "Oscar 32，Jill 33；二人均不是当前恋爱候选。"
+    },
+    {
+      "a": "Mage",
+      "b": "Elena",
+      "relation": "夫妻",
+      "new": true,
+      "note": "Mage 41，Elena 35；二人均不是当前恋爱候选。"
+    },
+    {
+      "a": "Vesper",
+      "b": "Xander",
+      "relation": "姐弟，Vesper为姐、Xander为弟",
+      "new": true,
+      "note": "年龄相差2岁。"
+    },
+    {
+      "a": "Tom",
+      "b": "Leo",
+      "relation": "兄弟，Tom为兄、Leo为弟",
+      "new": true,
+      "note": "年龄相差2岁。"
+    },
+    {
+      "a": "Tom",
+      "b": "Sam",
+      "relation": "兄弟，Tom为兄、Sam为弟",
+      "new": true,
+      "note": "年龄相差7岁。"
+    },
+    {
+      "a": "Leo",
+      "b": "Sam",
+      "relation": "兄弟，Leo为兄、Sam为弟",
+      "new": true,
+      "note": "年龄相差5岁。"
+    }
+  ],
+  "socialLinks": [
+    {
+      "people": [
+        "Frank",
+        "Prof. Mori",
+        "Kaspar",
+        "Ghost"
+      ],
+      "relation": "旧守谷会成员与长期旧识",
+      "routine": "偶尔在守谷会木屋碰面。普通日程里不会每天集合；主线推进后玩家才逐渐理解他们共同拥有的过去。"
+    },
+    {
+      "people": [
+        "Frank",
+        "Peter"
+      ],
+      "relation": "旧世交与略带回避的长辈关系",
+      "routine": "Frank偶尔帮Peter修工具；Peter很少主动谈父亲和水渠，Frank也不会强迫他。"
+    },
+    {
+      "people": [
+        "Frank",
+        "Widow"
+      ],
+      "relation": "旧友",
+      "routine": "Frank季节更替时会来检查Widow家的屋顶或排水，但Widow不喜欢被当成需要照顾的人。"
+    },
+    {
+      "people": [
+        "Widow",
+        "Ghost"
+      ],
+      "relation": "共享上一代记忆的朋友",
+      "routine": "Widow偶尔在傍晚去河边找Ghost，询问丈夫年轻时的一些普通小事。Ghost只在她主动问时回答。"
+    },
+    {
+      "people": [
+        "Peter",
+        "Mia"
+      ],
+      "relation": "稳定友情",
+      "routine": "Mia偶尔陪Peter走到森林外围。主线后期重新进入水渠时，她也是最愿意陪他的人。"
+    },
+    {
+      "people": [
+        "Sam",
+        "Ghost"
+      ],
+      "relation": "奇怪但稳定的朋友",
+      "routine": "Sam在酒馆习惯给Ghost留一把椅子，即使Ghost并不需要坐。"
+    },
+    {
+      "people": [
+        "Sam",
+        "Jack",
+        "Daisy"
+      ],
+      "relation": "爱惹小麻烦的朋友组",
+      "routine": "节庆准备、搬运工作或晚上闲逛时经常凑到一起，也是庆典假钟声事件最自然的组合。"
+    },
+    {
+      "people": [
+        "Sarah",
+        "Sam"
+      ],
+      "relation": "熟人式管束与温和冲突",
+      "routine": "Sam违反活动规则时Sarah经常第一个制止；两人没有真正恶意。"
+    },
+    {
+      "people": [
+        "Momo",
+        "Rose"
+      ],
+      "relation": "朋友",
+      "routine": "每周一起试做面包、果酱或花草点心，偶尔把失败品送给其他居民。"
+    },
+    {
+      "people": [
+        "Luna",
+        "Mage"
+      ],
+      "relation": "兴趣奇妙契合的朋友",
+      "routine": "在森林边讨论气场、天气、占卜和各种无法证明的东西，经常让旁观者分不清谁更认真。"
+    },
+    {
+      "people": [
+        "Alice",
+        "Ivy",
+        "Rita"
+      ],
+      "relation": "记录与核对搭档",
+      "routine": "主线调查期会定期在广场资料桌整理维修日志：Alice负责大量抄录，Ivy查细节，Rita找矛盾。"
+    },
+    {
+      "people": [
+        "Ada",
+        "Devin"
+      ],
+      "relation": "设施工作搭档",
+      "routine": "水渠事件后共同维护一份设施改动记录，避免任何人再单独修改地下系统却没人知道。"
+    },
+    {
+      "people": [
+        "Ada",
+        "God Eye"
+      ],
+      "relation": "分析方式不同的朋友",
+      "routine": "Ada逐条核对数据，God Eye寻找全局联系，两人偶尔在天文台比较各自画出的关系图。"
+    },
+    {
+      "people": [
+        "Devin",
+        "Ben"
+      ],
+      "relation": "合作时容易卡住的熟人",
+      "routine": "一起修公共设施时，Devin坚持按步骤，Ben一旦认定方案就不改，常常先争很久再把东西修得很牢。"
+    },
+    {
+      "people": [
+        "Hank",
+        "Old Fox"
+      ],
+      "relation": "酒馆老熟人",
+      "routine": "傍晚常在酒馆聊天。Old Fox讲真假难辨的故事，Hank负责指出自己以前听过几个不同版本。"
+    },
+    {
+      "people": [
+        "Zack",
+        "Chloe"
+      ],
+      "relation": "调查型朋友",
+      "routine": "喜欢把普通小事当谜案调查，例如追查谁拿走了公告栏旁最后一块点心。"
+    },
+    {
+      "people": [
+        "Leo",
+        "Xander"
+      ],
+      "relation": "性格相反但配合不错的朋友",
+      "routine": "Xander负责推动事情，Leo负责提醒他别推得过头。公共活动中常被安排在一组。"
+    },
+    {
+      "people": [
+        "Dante",
+        "Kaspar"
+      ],
+      "relation": "棋友",
+      "routine": "每周下一盘棋。Dante喜欢极高风险的走法，Kaspar经常说那一步没有道理。"
+    },
+    {
+      "people": [
+        "Frost",
+        "Sofia"
+      ],
+      "relation": "安静的观察型熟人",
+      "routine": "在酒馆或广场经常坐得不远，却很少主动聊天；偶尔会交换对某件事的简短判断。"
+    },
+    {
+      "people": [
+        "Elena",
+        "Ambassador"
+      ],
+      "relation": "擅长语言与调解的同事型朋友",
+      "routine": "居民出现争执时经常有人找他们帮忙调解，两人也会私下讨论同一句话不同说法的效果。"
+    },
+    {
+      "people": [
+        "Victor",
+        "Kaiser"
+      ],
+      "relation": "温和权力冲突",
+      "routine": "两人都喜欢主导会议，因此村里尽量避免让他们同时主持同一件事。"
+    },
+    {
+      "people": [
+        "Vesper",
+        "Justice"
+      ],
+      "relation": "原则分歧",
+      "routine": "Vesper认为部分信息应该控制公开时机，Justice强调事实应尽早核对，两人会有冷静但持续的争论。"
+    },
+    {
+      "people": [
+        "Nora",
+        "Jill"
+      ],
+      "relation": "稳健派与奇招派朋友",
+      "routine": "Jill提出三个奇怪方案，Nora通常否掉两个，留下偶尔真的能用的第三个。"
+    },
+    {
+      "people": [
+        "Oscar",
+        "Julian"
+      ],
+      "relation": "社交活动搭档",
+      "routine": "偶尔在酒馆组织小游戏夜，Oscar负责热闹，Julian负责确保不同圈子的居民都能参与。"
+    },
+    {
+      "people": [
+        "Clara",
+        "Socrates"
+      ],
+      "relation": "推理讨论朋友",
+      "routine": "Clara指出一个模式后，Socrates习惯不停问她为什么认为那是规律，两人常在公告板前聊很久。"
+    },
+    {
+      "people": [
+        "Tom",
+        "Mike"
+      ],
+      "relation": "轻微领导权竞争",
+      "routine": "Mike组织社区活动时Tom总希望负责一组；Mike后来干脆固定给他一项明确任务。"
+    },
+    {
+      "people": [
+        "Lily",
+        "Peter"
+      ],
+      "relation": "因异常事件形成的熟人关系",
+      "routine": "Lily在河里看见疑似Peter的身影之后，再遇见类似事情会先去确认Peter本人在哪里。"
+    },
+    {
+      "people": [
+        "Ben",
+        "Peter",
+        "Jack"
+      ],
+      "relation": "主线早期的误会关系",
+      "routine": "Lily看见河中身影后Ben坚持认为Peter有所隐瞒，Jack跟着起哄；真相展开后两人会逐渐意识到自己判断过快。"
+    }
+  ],
+  "romanceCandidates": [
+    "Zack",
+    "Chloe",
+    "Dante",
+    "Rita",
+    "Ghost",
+    "God Eye"
+  ],
+  "checks": {
+    "uniqueResidents": 48,
+    "allCovered": true,
+    "noExistingRomancePartner": true
+  },
+  "lifeScenes": [
+    {
+      "household": "frankFamilyHome",
+      "people": [
+        "Frank",
+        "Daisy",
+        "Gary"
+      ],
+      "lines": [
+        "Daisy：爷爷，你这个箱子到底为什么谁都不能碰？",
+        "Frank：因为里面都是没用的旧东西。",
+        "Gary：他说没用的时候，一般就是很重要。"
+      ]
+    },
+    {
+      "household": "hankFamilyHome",
+      "people": [
+        "Chloe",
+        "Toby",
+        "Hank"
+      ],
+      "lines": [
+        "Chloe：你昨晚十二点以后真的一次都没出门？",
+        "Toby：我、我为什么突然要证明这个？",
+        "Hank：因为你姐吃早饭之前已经审了两个人了。"
+      ]
+    },
+    {
+      "household": "moriFamilyHome",
+      "people": [
+        "Luna",
+        "Ada",
+        "Prof. Mori"
+      ],
+      "lines": [
+        "Luna：北边今天的风感觉是蓝色的。",
+        "Ada：风没有这个字段。",
+        "Prof. Mori：先别删，偶尔无法分类的记录反而最有价值。"
+      ]
+    },
+    {
+      "household": "kasparFamilyHome",
+      "people": [
+        "Zack",
+        "Rose",
+        "Kaspar"
+      ],
+      "lines": [
+        "Zack：我已经知道是谁把我的工具拿走了。",
+        "Rose：你昨天也这么说，然后工具在你床底下。",
+        "Kaspar：先确认棋盘上真的少了一枚棋子，再决定攻击谁。"
+      ]
+    },
+    {
+      "household": "oldFoxFamilyHome",
+      "people": [
+        "Dante",
+        "Mia",
+        "Old Fox"
+      ],
+      "lines": [
+        "Dante：我赌今晚会下雨。",
+        "Mia：你能不能有一次不赌？",
+        "Old Fox：可以。他小时候赌输了以后有三天没敢再提。"
+      ]
+    },
+    {
+      "household": "noraFamilyHome",
+      "people": [
+        "Jack",
+        "Nora"
+      ],
+      "lines": [
+        "Jack：我就说Sam肯定干了什么。",
+        "Nora：你有证据吗？",
+        "Jack：……现在还没有。"
+      ]
+    },
+    {
+      "household": "victorFamilyHome",
+      "people": [
+        "Momo",
+        "Victor"
+      ],
+      "lines": [
+        "Momo：Rose说森林那边晚上有人叫名字。",
+        "Victor：Rose从谁那里听来的？",
+        "Momo：我没问……她说的时候听起来很真的。"
+      ]
+    },
+    {
+      "household": "peterHome",
+      "people": [
+        "Peter",
+        "Mia",
+        "Player"
+      ],
+      "lines": [
+        "Mia：你不用今天就回那个入口。",
+        "Peter：我知道。",
+        "Peter：可如果我永远都说改天，那就永远不会去了。"
+      ]
+    },
+    {
+      "household": "widowHome",
+      "people": [
+        "Widow",
+        "Ghost",
+        "Player"
+      ],
+      "lines": [
+        "Widow：他年轻的时候也总把维修记录折成这样吗？",
+        "Ghost：嗯。Frank骂过很多次。",
+        "Widow：那看来有些毛病死了也改不了。"
+      ]
+    },
+    {
+      "household": "ghostHome",
+      "people": [
+        "Ghost",
+        "Sam",
+        "Player"
+      ],
+      "lines": [
+        "Sam：你既不睡觉，为什么还需要一间房？",
+        "Ghost：你也不是每时每刻都在睡。",
+        "Ghost：有个地方能回来，和需不需要床是两回事。"
+      ]
+    },
+    {
+      "household": "godEyeHome",
+      "people": [
+        "God Eye",
+        "Player"
+      ],
+      "lines": [
+        "God Eye：我把最近所有人的行动路线重新连了一遍。",
+        "Player：你自己呢？",
+        "God Eye：……以前的图里，我没有把自己算进去。"
+      ]
+    },
+    {
+      "household": "tomBrothersHome",
+      "people": [
+        "Tom",
+        "Leo",
+        "Sam"
+      ],
+      "lines": [
+        "Tom：谁把我的杯子拿走了？",
+        "Sam：首先，我们应该定义一下什么叫你的。",
+        "Leo：Sam，把杯子放回去。"
+      ]
+    }
+  ]
+}

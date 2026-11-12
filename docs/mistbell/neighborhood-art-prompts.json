@@ -1,0 +1,107 @@
+{
+  "source": "https://chatgpt.com/c/6acbd25d-fa08-83ec-b8e7-c359d58d6a8e",
+  "direction": [
+    {
+      "id": "farm-connected",
+      "source": "farm",
+      "prompt": "Use case: precise-object-edit. Edit this existing pixel farming RPG scene. Preserve the farmhouse, mailbox and well EXACTLY at their existing positions, same top-down camera, resolution and crisp pixel style. Change ONLY the exit geometry: completely CLOSE the bottom-center exit with continuous wooden fence and low trees. Open a 100 pixel wide dirt lane through the RIGHT/EAST boundary centered at image y=650 (64% height), reaching all the way to the right edge. This east lane joins the meadow without crossing crops. The farm has ONLY this EAST outdoor exit; farmhouse door remains a door. Keep central farming meadow empty. No characters, no text, no UI, no collectible rocks added."
+    },
+    {
+      "id": "square-connected",
+      "source": "square",
+      "prompt": "Use case: precise-object-edit. Preserve this exact pixel village square, seed shop upper left, clock tower, tavern upper right, board and open cobbled plaza. Correct its physical exits: (1) WEST/left edge open cobbled lane at y=650 of 1024, (2) EAST/right edge open cobbled lane at same y=650, (3) SOUTH bottom center at x=768 keep existing lane, (4) NORTH path reaching TOP EDGE centered at x=1020 of 1536, between clock tower and tavern, opening through the trees. Keep clock tower centered in its current place; route the north path behind its right side without crossing a building. Close any other unintended edge gaps. Main doors still front-facing at existing positions. No people, words, labels, UI. Preserve sharp square pixels, 1536x1024 composition, coherent cozy farming-game style."
+    },
+    {
+      "id": "bridge-connected",
+      "source": "bridge",
+      "prompt": "Use case: precise-object-edit. Preserve this pixel RPG river bridge scene and its camera exactly. Keep the north/top-center wooden bridge and dirt path reaching the TOP edge, keep the river horizontal in upper third and fishing dock at upper right. CLOSE bottom-center dirt exit with continuous grass and border trees. ADD a clear 100-pixel-wide dirt trail from the LEFT/WEST EDGE at y=650 of 1024 into the walkable south riverbank meadow. There are ONLY TWO outdoor exits: WEST to town and NORTH across the bridge; no south or east exit. Preserve river, dock, meadow, palette and crisp chunky pixels. No characters, text, UI or collectible resources."
+    }
+  ],
+  "housing": [
+    {
+      "id": "forest-connected",
+      "source": "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/forest-clean.png",
+      "prompt": "Edit this exact pixel forest. Preserve all central grass, texture, scale and north/south paths. Close ONLY the east/right path with dense continuous trees. Keep the north path reaching top edge centered x768 and south path reaching bottom edge centered x768. No other exits. 1536x1024."
+    },
+    {
+      "id": "sluice-connected",
+      "source": "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/sluice.png",
+      "prompt": "Edit exact pixel room, preserve everything especially 3 valves positions and southern stairs. Add a dry stone bridge across the east/right water channel centered y652 pixels leading into an open corridor through right border. Corridor about100pixels tall, extends from center floor x1250 to right edge1536. No other changes. 1536x1024."
+    },
+    {
+      "id": "door-connected",
+      "source": "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/door.png",
+      "prompt": "Edit exact pixel stone room. Preserve north glowing wood door and stone floor. Close bottom stair entrance with matching continuous stone wall. Add open horizontal stone corridor through LEFT border at y652 centered, about110pixels tall, leading into room. This room ONLY has west exit and north mysterious doorway. 1536x1024."
+    },
+    {
+      "id": "neighborhood",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. South village residential lane. Exactly two lovely two-storey timber apartment houses on upper left and upper right, left elm-tree house teal roof, right tidy stone-step house burgundy roof. Front door thresholds at x400,y400 and x1136,y400. Clear 110pixel wide north road centered x768 reaches TOP edge between houses; path leads into expansive open grassy stone courtyard occupying y440..910. East exit path centered y652 reaches RIGHT edge. Bottom and left borders continuous hedges, NO exits there. Potted flowers, laundry, lanterns only near walls and margins. Center empty for walking."
+    },
+    {
+      "id": "westLane",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Farm-side residential lane. Two long low homes on upper half: left rustic wheat-themed rowhouse, right quiet library apartment. Front door thresholds x400,y400 and x1136,y400. Broad empty grassy cobblestone courtyard y450..900. Continuous horizontal dirt path at y652 reaches both LEFT and RIGHT edges. NO north/south edge exits, hedges there. Vegetable boxes and farming tools against upper facade, books and flowers right. Keep center clear."
+    },
+    {
+      "id": "riverside",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Quiet riverside residential court. Upper left youthful blue-roof apartment with fishing racks; upper right peaceful ivy-covered laurel house with four upstairs windows and lavender roof. Door thresholds x400,y400 and x1136,y400. Large open walkable grass court y450..900. Single WEST exit horizontal path at y652 reaches left edge. No other edge paths. River beyond fenced east border, trees enclose north and south. Bench and plants at far margins only."
+    },
+    {
+      "id": "highlands",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. North wooded hill settlement. FOUR distinct compact buildings across upper strip: from left old keepers timber council cabin, old courtyard residence, star dorm house with long windows, small stone observatory with brass dome. South-facing door thresholds precisely x220,y400; x580,y400; x960,y400; x1320,y400. Building widths about250. Spacious empty grassy gravel common y450..900, branches up to each door. ONLY road exit is south centered x768 reaching bottom edge. Dense forest all other borders. No furniture in center."
+    },
+    {
+      "id": "elmHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Elm apartment shared living room for six independent residents. Six closed private-room doors spaced across north wall. Left corner bread oven, pink apron, plants and six boots; right corner flower arranging table and flour sacks. Cozy teal and cream wallpaper. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "youthHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Riverbridge youth apartment common room. Six closed private-room doors spaced across north wall. Fishing rods, dartboard, patched navy sofa, maps and hiking bags along upper and side walls. Warm blue and ochre. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "pagesHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Bookpage apartment reading common room. Six closed private-room doors across north wall. Bookshelves, indexed records, rolled maps, ink pots, color-coded paper slips, small desks at upper sides. Sage and walnut. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "wheatHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Wheat rowhouse shared conservatory/tool room. Five closed doors to separate homes across north wall. Sunlit timber, baskets, carefully sorted farm tools, potting bench at left edge, stove right edge. Ocher olive and cream. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "stepsHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Stone Steps apartment common living room. Five closed private-suite doors across north wall. Organized cupboards, pinned house rules without readable writing, kettle and crockery at left, small prototype tools at right. Burgundy rugs warm grey stone. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "innHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Tavern upper floor common lounge. Five closed rented-suite doors across north wall. Maroon velvet, game board on small side table upper left, theatre props upper right, warm amber lanterns, balcony windows. Bottom center is stairwell down. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "starsHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. North slope stargazers dorm common room. Five closed private-room doors across north wall. Navy and brass colors, telescopes by upper corner long windows, star chart rolls, instruments, blue rugs. No giant central telescope. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "keepersHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Old keepers courtyard shared indoor hall leading to six separate homes. Six closed private residence doors across north wall. Old brass pump by left wall, repair records, chess set, locked storage chest at right wall. Aged timber green windows warm lanterns. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    },
+    {
+      "id": "laurelHome",
+      "prompt": "Game background for Mistbell Valley. Exact landscape 1536x1024. Crisp handcrafted 16-bit pixel art like cozy farming RPG, visible square pixels, limited warm palette, orthographic top-down three-quarter view, no perspective vanishing point. No people, text, UI or labels. A playable walkable scene, NOT a concept illustration. Laurel house common room for four independent residents, not a family. Four closed private-suite doors across north wall, upper right suite door with bell charm. Violet ivy cream palette, old framed photos without discernible faces, peaceful empty chair, small keepsake shelf left. Ghost's keepsakes not horror. No beds in common room. Layout strict: north wall/doors/furniture confined y0..400. Side furniture confined x0..140 and x1396..1536. Central floor x160..1376, y430..900 completely clear for 6 moving NPCs; NO table or furniture here. A welcoming rug flush on floor is fine. Single main exit bottom center x768 with clear opening and steps crossing bottom edge. No side exits. Complete room fills frame."
+    }
+  ],
+  "corrections": [
+    {
+      "id": "stepsHome",
+      "source": "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/stepsHome.png",
+      "prompt": "Edit this exact pixel room only: replace the central north-wall noticeboard and small cabinet directly beneath it with one full-height closed private-room door matching the other four doors. Exactly FIVE doors now with centers x330,550,770,990,1210. Preserve room, scale, floor, edges, bottom exit, all other furniture. 1536x1024 pixel art."
+    },
+    {
+      "id": "riverside",
+      "source": "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/riverside.png",
+      "prompt": "Edit this exact pixel village scene. The left blue-roof building has TWO ground-floor doors. Replace ONLY its right door around x490,y250 with a normal matching window, remove only the little stone doorstep below that door and fill with grass. Keep the left doorway x380 and the right purple house doorway x1100. Preserve all other scene and west path."
+    },
+    {
+      "id": "door-connected",
+      "source": "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/door-connected.png",
+      "prompt": "Edit this exact pixel room: the west passage joining central room at x220,y500 must be OPEN, remove any vertical stones / jamb crossing the horizontal passage so clear stone FLOOR extends continuously from left edge all the way to center room. Opening bounded y445 to555, centered y500. Preserve all else exactly including north mystery door and closed south wall."
+    }
+  ],
+  "atlas": "Generate a crisp 16-bit pixel art illustrated WORLD MAP for cozy farming game Mistbell Valley, 1536x1024 landscape. NO words, NO labels, NO characters. Fixed geography: farmland on far west centered (180,560); a lane with two residential buildings at (450,560); central clocktower plaza at (768,560); stone river bridge at (1240,560). These four connected by one horizontal dirt road. Forest clearing at (768,340) connects north from plaza; hill with four tiny buildings including brass observatory at (768,120) connects north from forest. South residential street with two apartment houses at (768,840) connects south of plaza; riverside residential court with two houses at (1240,840) connects east of south street. Old canal stone arch at (1240,240) connects north from bridge. River restricted east side around bridge/canal and riverside, forests fill margins. Very clear connected roads. Buildings tiny like overworld icons, each neighborhood a small cluster, lush grass and flower pixels, warm muted greens and golden paths. Upper-right simple compass rose without letters. This is a playable navigation map illustration not realistic scenery."
+}

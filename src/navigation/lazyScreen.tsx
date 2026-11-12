@@ -14,6 +14,9 @@ export type LazyScreenFactory = () => Promise<{
  * cold-start code-splitting).
  */
 export const LAZY_SCREEN_IMPORTS = {
+  AvatarCreator: () => import('../screens/AvatarCreatorScreen'),
+  HallScene: () => import('../screens/HallSceneScreen'),
+  Exploration: () => import('../screens/MistbellScreen'),
   Tutorial: () => import('../screens/TutorialScreen'),
   TeamLobby: () => import('../screens/TeamLobbyScreen'),
   GameRoom: () => import('../screens/GameRoomScreen'),

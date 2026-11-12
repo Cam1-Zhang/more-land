@@ -7,8 +7,8 @@ import { normalizedLlmProvider } from './providerEnv';
 import type { LlmChatParams, LlmMessage } from './types';
 import { runSerializedOllamaTask } from './requestGate';
 
-const DEFAULT_SPEECH_TIMEOUT_MS = 180_000;
-const DEFAULT_ACTION_TIMEOUT_MS = 90_000;
+const DEFAULT_SPEECH_TIMEOUT_MS = 30_000;
+const DEFAULT_ACTION_TIMEOUT_MS = 20_000;
 
 export { normalizedLlmProvider };
 
@@ -154,6 +154,10 @@ async function llmChatOnce(params: LlmChatParams): Promise<string> {
     response = await attempt();
   } catch (e) {
     if (__DEV__) console.warn('[llm] fetch failed:', endpoint, e);
+    // A timeout already consumed the whole turn budget. Retrying the same
+    // request here made the UI appear frozen for minutes; let the caller use
+    // its game-safe fallback instead.
+    if (e instanceof Error && e.message.startsWith('[llm] timeout')) throw e;
     try {
       response = await attempt();
     } catch (e2) {

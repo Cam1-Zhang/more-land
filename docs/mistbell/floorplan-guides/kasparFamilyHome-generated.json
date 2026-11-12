@@ -1,0 +1,10 @@
+{
+  "id": "kasparFamilyHome",
+  "source": "/Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-c763574b-3d23-42be-abba-7f0fe16ad40e.png",
+  "dest": "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/homes/kasparFamilyHome-plan.png",
+  "prompt": "Use case: precise-object-edit. Correct this existing 1536x1024 pixel game interior. Preserve the entire architecture, doorways, furniture locations outside the specified patch, pixel style, palette and framing. Remove ONLY the single red bed in upper middle room x590..670,y170..320 and replace it with a small chess table and two simple stools. This is a chess sitting room, not bedroom. Keep the THREE OTHER beds: upper left cream, upper right green, middle right blue. Exactly three beds total. Everything else unchanged. No text, no people, no blur.",
+  "doorwayCorrection": {
+    "source": "/Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-e6c981f8-5c96-443c-bda8-eea0bcf0c273.png",
+    "prompt": "Preserve the house and exactly three beds; open the south partition of the upper-right green bedroom so it connects to the blue bedroom below."
+  }
+}

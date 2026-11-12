@@ -65,8 +65,8 @@ export function compileDaySpeechPrompt(input: DaySpeechPromptInput): DaySpeechPr
 
   const campaignRequirements = isBadgeSpeech
     ? isZh
-      ? `【警徽作用】\n警长拥有 1.5 票投票权，死亡时可移交警徽。竞选发言时，你可以自然说明为什么想拿警徽、你此刻更想看谁、以及你能不能带队。`
-      : `[Sheriff badge]\nSheriff has 1.5 votes and can transfer the badge on death. Campaign naturally: why you want it, who you'd watch, how you'd lead.`
+      ? `【警徽作用】\n警长拥有 1.5 票投票权，死亡时可移交警徽。竞选发言时，你可以自然说明为什么想拿警徽、你能不能带队。只有某人已经发言或做过公开行为时才能点名评价；不得随机先盯一个还没发言的人。`
+      : `[Sheriff badge]\nSheriff has 1.5 votes and can transfer the badge on death. Campaign naturally: why you want it and how you'd lead. Name and judge someone only after they have spoken or taken a public action; never randomly pre-suspect a future speaker.`
     : '';
 
   const taskLine = isLastWords
@@ -140,6 +140,16 @@ Never claim that you saw a vote pattern, that "the votes show" something, or tha
         : '[Phase]\nLast words.'
       : '';
 
+  const notYetSpoken = (ctx.notYetSpokenThisPhase ?? [])
+    .map((name) => name.trim())
+    .filter(Boolean);
+  const chronologySection =
+    ctx.dayNumber === 1 && !isLastWords && notYetSpoken.length > 0
+      ? isZh
+        ? `【发言时间线】\n以下玩家在当前环节还没发言：${notYetSpoken.join('、')}。\n禁止评价他们的发言逻辑、语气、态度或带节奏能力，也不能无依据说“盯住/留心/挂问号/偏狼”。最多中性地说“等TA发言再听”，不得预先贴标签。真预言家或悍跳预言家报明确查验结果不受此限制。`
+        : `[Speaking timeline]\nThese players have not spoken in the current phase: ${notYetSpoken.join(', ')}.\nDo not judge their logic, tone, attitude, or ability to steer the table, and do not pre-label them as suspicious. At most say neutrally that you will listen when they speak. A stated Seer result is exempt.`
+      : '';
+
   const idx = ctx.speechIndex + 1;
   const total = ctx.totalSpeakers;
   let speakOrderHint = '';
@@ -154,8 +164,8 @@ Never claim that you saw a vote pattern, that "the votes show" something, or tha
   }
 
   const user = isZh
-    ? `${gameContext ? `${gameContext}\n\n` : ''}【第${ctx.dayNumber}天公开记录（仅本日）】\n${todayTranscript}\n\n【你在第${ctx.dayNumber}天已说过的话】\n${selfSpeech}\n\n${phaseHintSection ? `${phaseHintSection}\n\n` : ''}【发言顺序】\n${speakOrderHint}\n\n轮到你接麦。默认只说一两个点，返回 1～2 条 JSON 字符串数组，不要 markdown，不要写思考过程：`
-    : `${gameContext ? `${gameContext}\n\n` : ''}[Day ${ctx.dayNumber} public log — this day only]\n${todayTranscript}\n\n[What you already said on Day ${ctx.dayNumber}]\n${selfSpeech}\n\n${phaseHintSection ? `${phaseHintSection}\n\n` : ''}[Order]\n${speakOrderHint}\n\nYour mic. Take only one or two points and return a JSON string array with 1–2 bubbles; no markdown or reasoning:`;
+    ? `${gameContext ? `${gameContext}\n\n` : ''}【第${ctx.dayNumber}天公开记录（仅本日）】\n${todayTranscript}\n\n【你在第${ctx.dayNumber}天已说过的话】\n${selfSpeech}\n\n${phaseHintSection ? `${phaseHintSection}\n\n` : ''}${chronologySection ? `${chronologySection}\n\n` : ''}【发言顺序】\n${speakOrderHint}\n\n轮到你接麦。默认只说一两个点，返回 1～2 条 JSON 字符串数组，不要 markdown，不要写思考过程：`
+    : `${gameContext ? `${gameContext}\n\n` : ''}[Day ${ctx.dayNumber} public log — this day only]\n${todayTranscript}\n\n[What you already said on Day ${ctx.dayNumber}]\n${selfSpeech}\n\n${phaseHintSection ? `${phaseHintSection}\n\n` : ''}${chronologySection ? `${chronologySection}\n\n` : ''}[Order]\n${speakOrderHint}\n\nYour mic. Take only one or two points and return a JSON string array with 1–2 bubbles; no markdown or reasoning:`;
 
   return {
     system,

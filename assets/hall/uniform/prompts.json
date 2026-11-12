@@ -1,0 +1,41 @@
+{
+  "mode": "built-in image_gen",
+  "reference": [
+    "../toby-seated.png",
+    "../momo-seated-v3.png"
+  ],
+  "prompt": "Use case: precise-object-edit. Sprite production correction. FIRST input is edit target (eight characters, four seated directions each). SECOND and THIRD inputs are the APPROVED Toby and Momo sprites and are the exact SIZE AND PROPORTION reference. Match ALL characters in target to those references: same perceived seated total height, same head-to-body ratio and same figure scale, not merely all heads smaller. Some heads should INCREASE, some DECREASE to match references. Absolutely do not uniformly reduce heads. Aim head cranium/hair cap to chin height about 40% of seated head-to-sole height, head width about 1.15 times shoulder width. Avoid tiny adult-proportioned heads; keep reference-like pixel villagers. Preserve each identity, hair/clothes/colors, expressions, age cues, filled skin hands. Preserve seated pose, hip and soles positions; fit head and torso within same total height. All four views of a character must keep same scale and head dimensions. ALL 32 sprites on sheet same head-to-sole height and same seat contact baseline within their cells. Hair length/hats/accessories may retain distinctive silhouette, but underlying skull/face scale matches Toby/Momo. Clear modest pixel eyes as in the reference, no huge anime eyes. Exact eight columns and four rows, order unchanged: front / left facing / right facing / back. Genuine transparent background, generous gutters, no text/chairs/shadows/grids. Crisp simple pixel art, no blurry outlines. For atlas with Toby/Momo in first two columns leave those columns unchanged; other atlases edit all characters. Ghost/fox/robed eye must preserve species.",
+  "normalization": "80x96 per frame, transparent horizontal padding; visible seated height 84, foot baseline y92, xcenter40; rendered at same84/96 pixel scale as Toby/Momo; reference sheets unchanged; no age scaling",
+  "sources": [
+    {
+      "group": 0,
+      "source": "source/roster-0.png",
+      "generation": "Generated images are saved to /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88 as /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-d1f2815c-8812-47ba-9bd2-5c24472f2d30.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "group": 1,
+      "source": "source/roster-1.png",
+      "generation": "Generated images are saved to /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88 as /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-7b20ba70-e263-44d1-a786-0a68f110b657.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "group": 2,
+      "source": "source/roster-2.png",
+      "generation": "Generated images are saved to /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88 as /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-f1f7f6a9-93ca-4721-92a7-08a1d693713f.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "group": 3,
+      "source": "source/roster-3.png",
+      "generation": "Generated images are saved to /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88 as /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-d34e23e0-7d76-47fc-a4fd-8f5a0b2acb33.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "group": 4,
+      "source": "source/roster-4.png",
+      "generation": "Generated images are saved to /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88 as /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-6164be4e-7511-4ba8-862d-9216f01ed152.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "group": 5,
+      "source": "source/roster-5.png",
+      "generation": "Generated images are saved to /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88 as /Users/camille/.codex/generated_images/01a0c292-a180-7711-8978-fffa08934a88/exec-b5a2462e-2af3-40ea-b173-5680bd4b4868.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import type { AppLanguage } from '../../i18n/appStrings';
 import { sanitizeDialogueLine } from '../../utils/reasoningHumanizer';
 import { scrubHiddenDaytimeBallotLine } from '../../utils/hiddenDayVoteSpeechGuard';
+import { scrubPrematurePlayerReads } from '../../utils/speechChronologyGuard';
 import {
   fixSelfThirdPersonSpeech,
   isSelfThirdPersonSpeech,
@@ -51,6 +52,9 @@ function scrubSpeechBubble(
   if (looksLikeWerewolfReasoningDump(out, lang)) return '';
   if (ctx.dayExileVotesPublic === false) {
     out = scrubHiddenDaytimeBallotLine(out, lang, focusName, out.length + 91);
+  }
+  if (ctx.dayNumber === 1 && ctx.channel !== 'lastwords') {
+    out = scrubPrematurePlayerReads(out, ctx.notYetSpokenThisPhase ?? [], lang);
   }
   return out.trim();
 }

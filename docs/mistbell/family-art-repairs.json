@@ -1,0 +1,24 @@
+[
+  {
+    "name": "home-solo",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/home-solo.png"
+    ],
+    "prompt": "Precise local edit of this 1536x1024 pixel game interior. Preserve every other furniture position, all architecture, pixel style, camera and size. Remove the family-photo console that blocks the center study doorway, currently x672..869,y338..428 in full image coordinates. Replace it with clear continuous wooden floor and an OPEN doorway into the study. Put the two small photographs instead ON TOP of the existing bookshelf in the study. Do not add any replacement console on the floor. Keep kitchen, desk, bed, sofa, table, wardrobe exactly where they are. No text or people."
+  },
+  {
+    "name": "family-generations",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/family-generations.png"
+    ],
+    "prompt": "Precise local edit of this 1536x1024 pixel game interior. Open the FOUR closed bedroom wooden doors in the upper partition, at x432,600,930,1106. Replace each closed door panel with a clearly OPEN dark doorway with visible wood floor continuing through. Keep absolutely all furniture, bedroom sizes, furniture positions, beds, palette, pixel style, camera and 1536x1024 dimensions unchanged. Do not move the family album, table, sofa or beds. No text or people."
+  },
+  {
+    "name": "bridgeRoad-family",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/bridgeRoad-nordic.png",
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ],
+    "prompt": "Precise-object edit. Image1 is target 1536x1024 pixel scene. Image2 is approved pixel style. Convert the EXISTING upper-left red boat shed into ONE inhabited family boathouse cottage: replace the open boat bay with red timber facade, a normal front door centered x330,y265 and two small lit domestic windows. Keep roof and chimney exactly. Add a narrow wooden footbridge from the front doorstep straight down across the small strip of water, reaching the lawn at x330,y430. This makes the home accessible on foot. Keep upper-right pond, picnic table, all grass, trees, west/east exits y560 unchanged. All new elements same crisp chunky pixels, no gradients, no people, no labels, no extra houses, no watermark."
+  }
+]

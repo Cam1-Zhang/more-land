@@ -1,650 +1,75 @@
 import React, { useCallback, useState } from 'react';
-import {
-  ActivityIndicator,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  useWindowDimensions,
-} from 'react-native';
+import { ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
-import { Check, ChevronLeft, Sparkles } from 'lucide-react-native';
-import { APP_LANGUAGE_KEY, type AppLanguage } from '../i18n/appStrings';
+import { ChevronLeft, Check } from 'lucide-react-native';
 import PixelAvatarSprite from '../components/PixelAvatarSprite';
+import type { Facing } from '../components/ExplorationSprite';
 import { GameWoodButton } from '../components/GameWoodButton';
 import HubDayNightBackground from '../components/HubDayNightBackground';
-import {
-  AVATAR_BODY_TYPES,
-  AVATAR_ACCESSORY_OPTIONS,
-  AVATAR_BOTTOM_OPTIONS,
-  AVATAR_HAIR_COLORS,
-  AVATAR_HAIR_OPTIONS,
-  AVATAR_SHOE_OPTIONS,
-  AVATAR_SKIN_OPTIONS,
-  AVATAR_TOP_OPTIONS,
-  DEFAULT_AVATAR_BY_BODY_TYPE,
-  DEFAULT_PIXEL_AVATAR_CONFIG,
-  USER_PIXEL_AVATAR_CONFIG_KEY,
-  USER_PIXEL_AVATAR_TRANSFORMS_KEY,
-  optionsForBody,
-  parsePixelAvatarConfig,
-  type AvatarBodyType,
-  type AvatarHairColor,
-  type PixelAvatarConfig,
-} from '../constants/avatarCreator';
-import { GAME_WOOD_BTN, PICKER_GLASS_PANEL_BG, PICKER_GLASS_PANEL_BORDER } from '../theme/gameButton';
-import { SDV } from '../theme/stardewPixel';
-
-const GLASS_INNER_BG = 'rgba(255, 255, 255, 0.55)' as const;
-const CONTENT_MAX_W = 920;
-const PREVIEW_SIZE = 128;
-const PREVIEW_HEIGHT = PREVIEW_SIZE * 1.5;
-
-const COPY = {
-  zh: {
-    title: '个人形象',
-    subtitle: 'Avatar Creator',
-    back: '返回设置',
-    save: '保存形象',
-    cancel: '取消',
-    reset: '重置默认',
-    body: '体型',
-    skin: '肤色',
-    hairStyle: '发型',
-    hairColor: '发色',
-    top: '上衣',
-    bottom: '裤子 / 下装',
-    shoes: '鞋子',
-    accessory: '配饰',
-    none: '无',
-  },
-  en: {
-    title: 'Avatar Creator',
-    subtitle: 'Pixel character layers',
-    back: 'Back to settings',
-    save: 'Save avatar',
-    cancel: 'Cancel',
-    reset: 'Reset default',
-    body: 'Body',
-    skin: 'Skin tone',
-    hairStyle: 'Hair',
-    hairColor: 'Hair color',
-    top: 'Top',
-    bottom: 'Bottom',
-    shoes: 'Shoes',
-    accessory: 'Accessory',
-    none: 'None',
-  },
-} as const;
-
-function prettyOption(value: string, lang: AppLanguage, noneLabel: string): string {
-  if (value === 'none') return noneLabel;
-  const names: Record<string, string> = {
-    skin_01: lang === 'zh' ? '肤色 1' : 'Skin 1',
-    skin_02: lang === 'zh' ? '肤色 2' : 'Skin 2',
-    skin_03: lang === 'zh' ? '肤色 3' : 'Skin 3',
-    skin_04: lang === 'zh' ? '肤色 4' : 'Skin 4',
-    skin_05: lang === 'zh' ? '肤色 5' : 'Skin 5',
-    skin_06: lang === 'zh' ? '肤色 6' : 'Skin 6',
-    male: lang === 'zh' ? '男生' : 'Male',
-    female: lang === 'zh' ? '女生' : 'Female',
-  };
-  const numbered = /_(\d{2})$/.exec(value);
-  if (value.includes('_hair_') && numbered) return lang === 'zh' ? `发型 ${Number(numbered[1])}` : `Hair ${Number(numbered[1])}`;
-  if (value.includes('_top_') && numbered) return lang === 'zh' ? `上衣 ${Number(numbered[1])}` : `Top ${Number(numbered[1])}`;
-  if (value.includes('_bottom_') && numbered) return lang === 'zh' ? `下装 ${Number(numbered[1])}` : `Bottom ${Number(numbered[1])}`;
-  if (value.includes('_shoes_') && numbered) return lang === 'zh' ? `鞋子 ${Number(numbered[1])}` : `Shoes ${Number(numbered[1])}`;
-  if (value.includes('_accessory_') && numbered) return lang === 'zh' ? `配饰 ${Number(numbered[1])}` : `Accessory ${Number(numbered[1])}`;
-  return names[value] ?? value;
-}
-
-function OptionGroup<T extends string>({
-  title,
-  values,
-  value,
-  onChange,
-  lang,
-  noneLabel,
-}: {
-  title: string;
-  values: readonly T[];
-  value: T;
-  onChange: (value: T) => void;
-  lang: AppLanguage;
-  noneLabel: string;
-}) {
-  return (
-    <View style={styles.optionGroup}>
-      <Text style={styles.optionTitle}>{title}</Text>
-      <View style={styles.optionGrid}>
-        {values.map((item) => {
-          const selected = item === value;
-          return (
-            <TouchableOpacity
-              key={item}
-              style={[styles.optionChip, selected && styles.optionChipOn]}
-              onPress={() => onChange(item)}
-              activeOpacity={0.84}
-              accessibilityRole="button"
-              accessibilityLabel={prettyOption(item, lang, noneLabel)}
-              accessibilityState={{ selected }}
-            >
-              <Text style={[styles.optionChipText, selected && styles.optionChipTextOn]}>
-                {prettyOption(item, lang, noneLabel)}
-              </Text>
-              {selected ? <Check size={12} color="#fff8ec" strokeWidth={3} /> : null}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-    </View>
-  );
-}
-
-function ColorGroup({
-  title,
-  value,
-  onChange,
-}: {
-  title: string;
-  value: AvatarHairColor;
-  onChange: (value: AvatarHairColor) => void;
-}) {
-  return (
-    <View style={styles.optionGroup}>
-      <Text style={styles.optionTitle}>{title}</Text>
-      <View style={styles.colorGrid}>
-        {AVATAR_HAIR_COLORS.map((item) => {
-          const selected = item.id === value;
-          return (
-            <TouchableOpacity
-              key={item.id}
-              style={[styles.colorChip, selected && styles.colorChipOn]}
-              onPress={() => onChange(item.id)}
-              activeOpacity={0.84}
-              accessibilityLabel={item.label}
-              accessibilityRole="button"
-              accessibilityState={{ selected }}
-            >
-              <View style={[styles.colorSwatch, { backgroundColor: item.id }]} />
-              {selected ? <Check size={12} color="#fff8ec" strokeWidth={3} /> : null}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-    </View>
-  );
-}
+import { DEFAULT_AVATAR_BY_BODY_TYPE, USER_PIXEL_AVATAR_CONFIG_KEY, USER_PIXEL_AVATAR_TRANSFORMS_KEY, parsePixelAvatarConfig } from '../constants/avatarCreator';
+import { PERSONAL_AVATARS, getPersonalAvatar, type PersonalAvatarId } from '../constants/personalAvatars';
+import { APP_LANGUAGE_KEY, type AppLanguage } from '../i18n/appStrings';
+import { GAME_PIXEL_CJK_FONT_FAMILY } from '../theme/pixelFont';
 
 export default function AvatarCreatorScreen({ navigation }: any) {
-  const { width: screenW } = useWindowDimensions();
+  const { width } = useWindowDimensions();
+  const compact = width < 720;
   const [lang, setLang] = useState<AppLanguage>('zh');
-  const [config, setConfig] = useState<PixelAvatarConfig>(DEFAULT_PIXEL_AVATAR_CONFIG);
+  const [selected, setSelected] = useState<PersonalAvatarId>('male-normal');
   const [ready, setReady] = useState(false);
-
-  useFocusEffect(
-    useCallback(() => {
-      let cancelled = false;
-      void (async () => {
-        setReady(false);
-        const [rawLang, rawAvatar] = await Promise.all([
-          AsyncStorage.getItem(APP_LANGUAGE_KEY),
-          AsyncStorage.getItem(USER_PIXEL_AVATAR_CONFIG_KEY),
-        ]);
-        if (cancelled) return;
-        setLang(rawLang === 'en' ? 'en' : 'zh');
-        const nextConfig = parsePixelAvatarConfig(rawAvatar) ?? DEFAULT_PIXEL_AVATAR_CONFIG;
-        setConfig(nextConfig);
-        setReady(true);
-      })();
-      return () => {
-        cancelled = true;
-      };
-    }, [])
-  );
-
-  const update = <K extends keyof PixelAvatarConfig>(key: K, value: PixelAvatarConfig[K]) => {
-    setConfig((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const updateBodyType = (bodyType: AvatarBodyType) => {
-    setConfig((prev) => ({
-      ...DEFAULT_AVATAR_BY_BODY_TYPE[bodyType],
-      skinTone: prev.skinTone,
-      hairColor: prev.hairColor,
-    }));
-  };
-
-  const resetDefault = () => {
-    setConfig(DEFAULT_AVATAR_BY_BODY_TYPE[config.bodyType]);
-  };
-
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  const [pose, setPose] = useState<'standing' | 'seated'>('standing');
+  const [facing, setFacing] = useState<Facing>('down');
+  const zh = lang === 'zh';
+  useFocusEffect(useCallback(() => {
+    let active = true;
+    void Promise.all([AsyncStorage.getItem(APP_LANGUAGE_KEY), AsyncStorage.getItem(USER_PIXEL_AVATAR_CONFIG_KEY)])
+      .then(([language, raw]) => { if (active) { setLang(language === 'en' ? 'en' : 'zh'); setSelected(getPersonalAvatar(parsePixelAvatarConfig(raw) ?? {}).id); setReady(true); } })
+      .catch(() => { if (active) setError('读取形象失败，请返回后重试。'); });
+    return () => { active = false; };
+  }, []));
+  const avatar = getPersonalAvatar({ presetId: selected });
+  const config = { ...DEFAULT_AVATAR_BY_BODY_TYPE[avatar.bodyType], presetId: selected };
   const save = async () => {
-    await Promise.all([
-      AsyncStorage.setItem(USER_PIXEL_AVATAR_CONFIG_KEY, JSON.stringify(config)),
-      AsyncStorage.setItem(USER_PIXEL_AVATAR_TRANSFORMS_KEY, JSON.stringify({})),
-    ]);
-    navigation.goBack();
+    if (saving || !ready) return;
+    setSaving(true); setError('');
+    try {
+      await AsyncStorage.multiSet([[USER_PIXEL_AVATAR_CONFIG_KEY, JSON.stringify(config)], [USER_PIXEL_AVATAR_TRANSFORMS_KEY, '{}']]);
+      navigation.goBack();
+    } catch { setError(zh ? '保存失败，请重试。' : 'Could not save. Please retry.'); }
+    finally { setSaving(false); }
   };
-
-  const t = COPY[lang];
-  const contentW = Math.min(screenW - 32, CONTENT_MAX_W);
-  const skinOptions = optionsForBody(AVATAR_SKIN_OPTIONS, config.bodyType).map((o) => o.id);
-  const hairOptions = optionsForBody(AVATAR_HAIR_OPTIONS, config.bodyType).map((o) => o.id);
-  const topOptions = optionsForBody(AVATAR_TOP_OPTIONS, config.bodyType).map((o) => o.id);
-  const bottomOptions = optionsForBody(AVATAR_BOTTOM_OPTIONS, config.bodyType).map((o) => o.id);
-  const shoeOptions = optionsForBody(AVATAR_SHOE_OPTIONS, config.bodyType).map((o) => o.id);
-  const accessoryOptions = [
-    'none' as const,
-    ...optionsForBody(AVATAR_ACCESSORY_OPTIONS, config.bodyType).map((o) => o.id),
-  ];
-
-  if (!ready) {
-    return (
-      <HubDayNightBackground style={styles.root}>
-        <SafeAreaView style={[styles.safe, styles.centered]}>
-          <StatusBar barStyle="dark-content" />
-          <ActivityIndicator size="large" color={SDV.wood} />
-        </SafeAreaView>
-      </HubDayNightBackground>
-    );
-  }
-
-  return (
-    <HubDayNightBackground style={styles.root}>
-      <SafeAreaView style={styles.safe}>
-        <StatusBar barStyle="dark-content" />
-        <View style={styles.pageBody}>
-          <View style={[styles.mainShell, { maxWidth: contentW }]}>
-            <View style={styles.header}>
-              <GameWoodButton
-                variant="icon"
-                onPress={() => navigation.goBack()}
-                accessibilityLabel={t.back}
-              >
-                <ChevronLeft color={GAME_WOOD_BTN.text} size={22} strokeWidth={2.5} />
-              </GameWoodButton>
-              <View style={styles.headerCenter}>
-                <Text style={styles.pageTitle}>{t.title}</Text>
-                <Text style={styles.pageSubtitle}>{t.subtitle}</Text>
-              </View>
-              <View style={styles.headerSpacer} />
-            </View>
-
-            <ScrollView
-              style={styles.scroll}
-              contentContainerStyle={styles.scrollContent}
-              showsVerticalScrollIndicator={false}
-            >
-              <View style={styles.previewPanel}>
-                <View style={styles.previewStage}>
-                  <View style={styles.avatarCanvas}>
-                    <PixelAvatarSprite config={config} size={PREVIEW_SIZE} />
-                  </View>
-                </View>
-              </View>
-
-              <View style={styles.editorPanel}>
-                <View style={styles.editorHeader}>
-                  <Sparkles size={17} color={SDV.ink} strokeWidth={2.2} />
-                  <Text style={styles.editorTitle}>{t.title}</Text>
-                </View>
-
-                <OptionGroup
-                  title={t.body}
-                  values={AVATAR_BODY_TYPES}
-                  value={config.bodyType}
-                  onChange={updateBodyType}
-                  lang={lang}
-                  noneLabel={t.none}
-                />
-                <OptionGroup
-                  title={t.skin}
-                  values={skinOptions}
-                  value={config.skinTone}
-                  onChange={(v) => update('skinTone', v)}
-                  lang={lang}
-                  noneLabel={t.none}
-                />
-                <OptionGroup
-                  title={t.hairStyle}
-                  values={hairOptions}
-                  value={config.hairStyle}
-                  onChange={(v) => update('hairStyle', v)}
-                  lang={lang}
-                  noneLabel={t.none}
-                />
-                <ColorGroup
-                  title={t.hairColor}
-                  value={config.hairColor}
-                  onChange={(v) => update('hairColor', v)}
-                />
-                <OptionGroup
-                  title={t.top}
-                  values={topOptions}
-                  value={config.top}
-                  onChange={(v) => update('top', v)}
-                  lang={lang}
-                  noneLabel={t.none}
-                />
-                <OptionGroup
-                  title={t.bottom}
-                  values={bottomOptions}
-                  value={config.bottom}
-                  onChange={(v) => update('bottom', v)}
-                  lang={lang}
-                  noneLabel={t.none}
-                />
-                <OptionGroup
-                  title={t.shoes}
-                  values={shoeOptions}
-                  value={config.shoes}
-                  onChange={(v) => update('shoes', v)}
-                  lang={lang}
-                  noneLabel={t.none}
-                />
-                <OptionGroup
-                  title={t.accessory}
-                  values={accessoryOptions}
-                  value={config.accessory}
-                  onChange={(v) => update('accessory', v)}
-                  lang={lang}
-                  noneLabel={t.none}
-                />
-              </View>
-
-              <View style={styles.actions}>
-                <GameWoodButton
-                  variant="text"
-                  compact
-                  tone="outline"
-                  label={t.cancel}
-                  onPress={() => navigation.goBack()}
-                />
-                <GameWoodButton
-                  variant="text"
-                  compact
-                  tone="outline"
-                  label={t.reset}
-                  onPress={resetDefault}
-                />
-                <GameWoodButton variant="text" wide label={`✦ ${t.save} ✦`} onPress={() => void save()} />
-              </View>
-            </ScrollView>
-          </View>
-        </View>
-      </SafeAreaView>
-    </HubDayNightBackground>
-  );
+  const preview = <View style={[styles.preview, compact && styles.previewCompact]}>
+    <Text style={styles.eyebrow}>{zh ? '我的游戏形象' : 'MY CHARACTER'}</Text>
+    <View style={styles.stage}><PixelAvatarSprite config={config} size={compact ? 112 : 164} pose={pose} facing={facing} /></View>
+    <View style={styles.poseRow}>{(['standing', 'seated'] as const).map(value => <TouchableOpacity key={value} accessibilityRole="button" accessibilityState={{ selected: pose === value }} onPress={() => setPose(value)} style={[styles.poseButton, pose === value && styles.poseOn]}><Text style={styles.ink}>{value === 'standing' ? zh ? '站姿' : 'Standing' : zh ? '坐姿' : 'Seated'}</Text></TouchableOpacity>)}</View>
+    {pose === 'seated' && <View style={styles.poseRow}>{([['down', '正面', 'Front'], ['left', '左侧', 'Left'], ['right', '右侧', 'Right'], ['up', '背面', 'Back']] as const).map(([value, label, english]) => <TouchableOpacity key={value} accessibilityRole="button" accessibilityLabel={zh ? `${label}坐姿` : `${english} seated`} accessibilityState={{ selected: facing === value }} onPress={() => setFacing(value)} style={[styles.directionButton, facing === value && styles.poseOn]}><Text style={styles.ink}>{zh ? label : english}</Text></TouchableOpacity>)}</View>}
+    <Text style={styles.previewTitle}>{zh ? avatar.style : avatar.styleEn}</Text>
+    <Text style={styles.hint}>{zh ? '保存后，以这个形象进入\n狼人杀与阿瓦隆。' : 'Save this character to use it in\nWerewolf and Avalon.'}</Text>
+  </View>;
+  const gallery = <View style={styles.gallery}>{(['male','female'] as const).map(body => <View key={body} style={{ gap: 8 }}>
+    <Text style={styles.groupTitle}>{body === 'male' ? zh ? '男生' : 'Boys' : zh ? '女生' : 'Girls'}</Text>
+    <View style={styles.cards}>{PERSONAL_AVATARS.filter(item => item.bodyType === body).map(item => <TouchableOpacity key={item.id} accessibilityRole="button" accessibilityLabel={`${body === 'male' ? '男生' : '女生'}${item.style}`} accessibilityState={{ selected: selected === item.id }} onPress={() => setSelected(item.id)} style={[styles.card, selected === item.id && styles.cardOn]}>
+      {selected === item.id && <View style={styles.check}><Check size={14} color="#fff8df" /></View>}
+      <PixelAvatarSprite config={{ ...DEFAULT_AVATAR_BY_BODY_TYPE[body], presetId: item.id }} size={compact ? Math.max(52, Math.min(90,(width - 120)/3)) : 112} />
+      <Text style={styles.cardTitle}>{zh ? item.style : item.styleEn}</Text>
+      {!compact && <Text style={styles.cardDetail}>{zh ? item.detail : item.detailEn}</Text>}
+    </TouchableOpacity>)}</View>
+  </View>)}</View>;
+  return <HubDayNightBackground style={{ flex: 1 }}><SafeAreaView style={styles.safe}><View style={styles.shell}>
+    <View style={styles.header}><GameWoodButton variant="icon" accessibilityLabel={zh ? '返回设置' : 'Back to settings'} onPress={() => navigation.goBack()}><ChevronLeft color="#fff3d8" size={22} /></GameWoodButton><View style={{ flex: 1, alignItems: 'center' }}><Text style={styles.title}>{zh ? '个人形象' : 'Your Character'}</Text><Text style={styles.subtitle}>{zh ? '挑一个喜欢的样子，走进狼人村' : 'Choose your look for the village'}</Text></View><View style={{ width: 44 }} /></View>
+    {!ready ? <View style={styles.loading}><ActivityIndicator color="#754a2b" /><Text style={styles.error}>{error}</Text></View> : compact ? <ScrollView contentContainerStyle={{ padding: 12, gap: 12 }}>{preview}{gallery}</ScrollView> : <View style={styles.columns}>{preview}<ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 18 }}>{gallery}</ScrollView></View>}
+    {!!error && ready && <Text accessibilityRole="alert" style={styles.error}>{error}</Text>}
+    <View style={styles.footer}><Text style={styles.footerHint}>{zh ? '男女各三款 · 完整形象选择' : 'Six complete character styles'}</Text><GameWoodButton variant="text" label={saving ? zh ? '保存中…' : 'Saving…' : zh ? '保存形象' : 'Save avatar'} disabled={!ready || saving} onPress={() => void save()} /></View>
+  </View></SafeAreaView></HubDayNightBackground>;
 }
-
 const styles = StyleSheet.create({
-  root: { flex: 1 },
-  safe: { flex: 1, backgroundColor: 'transparent' },
-  centered: { justifyContent: 'center', alignItems: 'center' },
-  pageBody: {
-    flex: 1,
-    paddingHorizontal: 14,
-    paddingTop: 4,
-    paddingBottom: 10,
-    alignItems: 'center',
-  },
-  mainShell: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: PICKER_GLASS_PANEL_BG,
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 14,
-    paddingTop: 12,
-    paddingBottom: 12,
-    gap: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'rgba(74, 55, 40, 0.12)',
-  },
-  headerCenter: { flex: 1, minWidth: 0, alignItems: 'center' },
-  headerSpacer: { width: 44, flexShrink: 0 },
-  pageTitle: {
-    fontSize: 25,
-    fontWeight: '900',
-    color: SDV.ink,
-  },
-  pageSubtitle: {
-    marginTop: 5,
-    fontSize: 12,
-    fontWeight: '700',
-    color: SDV.subtext,
-  },
-  scroll: { flex: 1 },
-  scrollContent: {
-    padding: 16,
-    gap: 14,
-    paddingBottom: 30,
-  },
-  previewPanel: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: GLASS_INNER_BG,
-    borderColor: PICKER_GLASS_PANEL_BORDER,
-    borderWidth: 1.5,
-    borderRadius: 14,
-    paddingVertical: 16,
-    paddingHorizontal: 12,
-  },
-  calibrationTitle: {
-    fontSize: 15,
-    fontWeight: '900',
-    color: SDV.ink,
-  },
-  calibrationHint: {
-    maxWidth: 440,
-    marginTop: 5,
-    marginBottom: 12,
-    textAlign: 'center',
-    fontSize: 11,
-    lineHeight: 17,
-    fontWeight: '700',
-    color: SDV.subtext,
-  },
-  layerTabs: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: 7,
-    marginBottom: 12,
-  },
-  layerTab: {
-    minHeight: 32,
-    justifyContent: 'center',
-    paddingHorizontal: 11,
-    borderRadius: 7,
-    borderWidth: 1.5,
-    borderColor: 'rgba(180, 150, 100, 0.4)',
-    backgroundColor: 'rgba(255, 255, 255, 0.62)',
-  },
-  layerTabOn: {
-    borderColor: '#c9a040',
-    backgroundColor: SDV.wood,
-  },
-  layerTabText: {
-    fontSize: 11,
-    fontWeight: '900',
-    color: SDV.ink,
-  },
-  layerTabTextOn: {
-    color: '#fff8ec',
-  },
-  previewStage: {
-    width: 190,
-    height: 220,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1.5,
-    borderColor: 'rgba(150, 120, 78, 0.28)',
-    backgroundColor: 'rgba(255, 250, 238, 0.7)',
-    borderRadius: 8,
-    overflow: 'visible',
-  },
-  avatarCanvas: {
-    width: PREVIEW_SIZE,
-    height: PREVIEW_HEIGHT,
-    position: 'relative',
-  },
-  selectionBox: {
-    position: 'absolute',
-    borderWidth: 1.5,
-    borderColor: '#e9a51b',
-    borderStyle: 'dashed',
-    minWidth: 12,
-    minHeight: 12,
-  },
-  moveSurface: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255, 190, 50, 0.025)',
-    cursor: 'move',
-  },
-  resizeHandle: {
-    position: 'absolute',
-    right: -11,
-    bottom: -11,
-    width: 24,
-    height: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: '#fff7df',
-    backgroundColor: '#c97b22',
-    cursor: 'nwse-resize',
-  },
-  resizeHandleGlyph: {
-    color: '#fff',
-    fontSize: 14,
-    lineHeight: 16,
-    fontWeight: '900',
-  },
-  transformReadout: {
-    marginTop: 13,
-    alignItems: 'center',
-    gap: 8,
-  },
-  transformReadoutText: {
-    color: SDV.subtext,
-    fontSize: 10,
-    fontWeight: '800',
-  },
-  resetLayerButton: {
-    minHeight: 30,
-    justifyContent: 'center',
-    paddingHorizontal: 12,
-    borderRadius: 7,
-    borderWidth: 1.5,
-    borderColor: 'rgba(150, 112, 65, 0.42)',
-    backgroundColor: 'rgba(255, 255, 255, 0.58)',
-  },
-  resetLayerButtonText: {
-    color: SDV.ink,
-    fontSize: 11,
-    fontWeight: '900',
-  },
-  editorPanel: {
-    backgroundColor: GLASS_INNER_BG,
-    borderColor: PICKER_GLASS_PANEL_BORDER,
-    borderWidth: 1.5,
-    borderRadius: 14,
-    padding: 14,
-  },
-  editorHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginBottom: 6,
-  },
-  editorTitle: {
-    fontSize: 15,
-    fontWeight: '900',
-    color: SDV.ink,
-  },
-  optionGroup: {
-    paddingTop: 12,
-  },
-  optionTitle: {
-    fontSize: 11,
-    fontWeight: '800',
-    color: SDV.subtext,
-    marginBottom: 8,
-  },
-  optionGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  colorGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  optionChip: {
-    minHeight: 38,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-    paddingHorizontal: 12,
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: 'rgba(180, 150, 100, 0.4)',
-    backgroundColor: GLASS_INNER_BG,
-  },
-  optionChipOn: {
-    backgroundColor: SDV.wood,
-    borderColor: '#c9a040',
-  },
-  optionChipText: {
-    fontSize: 12,
-    fontWeight: '800',
-    color: SDV.ink,
-  },
-  optionChipTextOn: {
-    color: '#fff8ec',
-  },
-  colorChip: {
-    width: 42,
-    height: 38,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 4,
-    borderRadius: 8,
-    borderWidth: 1.5,
-    borderColor: 'rgba(180, 150, 100, 0.4)',
-    backgroundColor: GLASS_INNER_BG,
-  },
-  colorChipOn: {
-    backgroundColor: SDV.wood,
-    borderColor: '#c9a040',
-  },
-  colorSwatch: {
-    width: 18,
-    height: 18,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: 'rgba(60, 45, 32, 0.35)',
-  },
-  actions: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 10,
-    paddingTop: 2,
-  },
+  safe:{flex:1,padding:16,alignItems:'center',justifyContent:'center'},shell:{width:'100%',maxWidth:1020,maxHeight:780,flex:1,borderWidth:4,borderColor:'#70452a',borderRadius:8,backgroundColor:'#f4dfb7',overflow:'hidden'},
+  header:{flexDirection:'row',alignItems:'center',padding:14,borderBottomWidth:3,borderBottomColor:'#bc8a52',backgroundColor:'#ecd09b'},title:{fontFamily:GAME_PIXEL_CJK_FONT_FAMILY,fontSize:25,fontWeight:'800',color:'#593921'},subtitle:{fontSize:12,color:'#89633f',marginTop:4},
+  columns:{flex:1,flexDirection:'row'},preview:{width:290,padding:20,alignItems:'center',justifyContent:'center',backgroundColor:'#e8cb96',borderRightWidth:2,borderColor:'#c59860'},previewCompact:{width:'100%',borderRightWidth:0,padding:12},eyebrow:{fontSize:12,letterSpacing:2,color:'#79502e',marginBottom:12,fontWeight:'800'},
+  stage:{width:'100%',minHeight:190,alignItems:'center',justifyContent:'center',backgroundColor:'#d4d4ad',borderWidth:2,borderColor:'#ae8c54',borderRadius:5,padding:12},poseRow:{flexDirection:'row',gap:8,marginTop:12},poseButton:{paddingHorizontal:16,paddingVertical:7,borderWidth:1,borderColor:'#b99059',borderRadius:3},directionButton:{paddingHorizontal:10,paddingVertical:7,borderWidth:1,borderColor:'#b99059',borderRadius:3},poseOn:{backgroundColor:'#b99059'},ink:{color:'#593921',fontSize:12},previewTitle:{marginTop:18,fontSize:18,fontWeight:'800',color:'#67442a'},hint:{marginTop:8,textAlign:'center',fontSize:12,lineHeight:19,color:'#876440'},
+  gallery:{gap:16},groupTitle:{fontFamily:GAME_PIXEL_CJK_FONT_FAMILY,fontSize:17,color:'#6a4328',fontWeight:'800'},cards:{flexDirection:'row',gap:10},card:{flex:1,minWidth:0,alignItems:'center',paddingVertical:10,paddingHorizontal:4,borderWidth:2,borderColor:'#c9a674',borderRadius:5,backgroundColor:'#faebcb'},cardOn:{borderColor:'#795033',backgroundColor:'#f0d293'},cardTitle:{fontSize:14,fontWeight:'800',color:'#634128',marginTop:4},cardDetail:{fontSize:10,color:'#876440',marginTop:6,textAlign:'center'},check:{position:'absolute',right:6,top:6,width:22,height:22,alignItems:'center',justifyContent:'center',backgroundColor:'#795033',borderRadius:3},
+  footer:{flexDirection:'row',alignItems:'center',gap:12,padding:12,borderTopWidth:3,borderTopColor:'#bc8a52',backgroundColor:'#ecd09b'},footerHint:{flex:1,fontSize:12,color:'#89633f'},error:{padding:10,color:'#9f332e',textAlign:'center'},loading:{flex:1,alignItems:'center',justifyContent:'center'},
 });

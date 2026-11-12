@@ -1,0 +1,167 @@
+{
+  "tool": "built-in image_gen",
+  "status": "rejected-proportions-generation-limit",
+  "pilotPrompt": "Production pixel-art WALK ANIMATION atlas for FOUR existing characters. Input1 is existing character appearance reference (seated poses only; convert them to WALKING, do not keep sitting). Input2 Toby walking sheet is exact style, proportions and animation template.\nCreate EXACTLY 8 COLUMNS × 8 ROWS = 64 separate whole-body sprites on genuinely TRANSPARENT background, square canvas. Four independent 4×4 sheets arranged in a 2×2 block grid.\nTOP LEFT block (columns1–4,rows1–4): JACK, input1 column3, black side-swept short hair, black gold-button jacket, black trousers and boots.\nTOP RIGHT block (columns5–8,rows1–4): LILY, input1 column4, long orange hair, green long dress, gold necklace, brown shoes.\nBOTTOM LEFT block (columns1–4,rows5–8): BEN, input1 column5, tousled blond-brown short hair, green jacket and trousers, dark boots.\nBOTTOM RIGHT block (columns5–8,rows5–8): FRANK, input1 column6, old man with swept silver hair and white mustache, brown suit cream shirt dark tie and shoes.\nWithin EACH block: row1 faces FRONT/down, row2 strict LEFT profile, row3 strict RIGHT profile, row4 BACK/up. Each row has four frames: feet together idle, LEFT leg forward walking and opposite arm forward, feet together, RIGHT leg forward walking and opposite arm forward. Clearly different alternating step silhouettes; torso stays upright, hips extended, knees not permanently bent/sitting. The two stride frames must differ. Match Toby's small head roughly40% totalheight, slender Stardew-style game body, crisp pixel eyes with whites, chunky low-res clusters and limited palette. All four characters same height, scale, head size, baseline in every cell; hair/face/clothing identical throughout a character's 16 frames. Keep original identities/outfits, including elder Frank. Each frame centered with ample gutters; no text, separators, chairs, ground or shadows. Exact 8×8 grid, do not omit frames.",
+  "pendingJobs": [
+    {
+      "index": 1,
+      "ids": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 2 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Daisy, reference image1 column7, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Sam, reference image1 column8, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Alice, reference image2 column1, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Tom, reference image2 column2, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-0.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-1.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 2,
+      "ids": [
+        11,
+        12,
+        13,
+        14
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 1 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Luna, reference image1 column3, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Peter, reference image1 column4, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Zack, reference image1 column5, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Rose, reference image1 column6, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-1.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 3,
+      "ids": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 2 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Devin, reference image1 column7, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Sarah, reference image1 column8, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Mike, reference image2 column1, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Chloe, reference image2 column2, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-1.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-2.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 4,
+      "ids": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 1 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Gary, reference image1 column3, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Mia, reference image1 column4, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Leo, reference image1 column5, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Ivy, reference image1 column6, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-2.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 5,
+      "ids": [
+        23,
+        24,
+        25,
+        26
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 2 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Hank, reference image1 column7, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Jill, reference image1 column8, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Frost, reference image2 column1, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Oscar, reference image2 column2, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-2.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-3.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 6,
+      "ids": [
+        27,
+        28,
+        29,
+        30
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 1 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Elena, reference image1 column3, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Mage, reference image1 column4, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Victor, reference image1 column5, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Sofia, reference image1 column6, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-3.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 7,
+      "ids": [
+        31,
+        32,
+        33,
+        34
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 2 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Dante, reference image1 column7, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Rita, reference image1 column8, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Xander, reference image2 column1, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Nora, reference image2 column2, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-3.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-4.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 8,
+      "ids": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 1 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Julian, reference image1 column3, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Clara, reference image1 column4, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Prof. Mori, reference image1 column5, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Widow, reference image1 column6, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-4.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 9,
+      "ids": [
+        39,
+        40,
+        41,
+        42
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 2 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Kaspar, reference image1 column7, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Vesper, reference image1 column8, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Socrates, reference image2 column1, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Ada, reference image2 column2, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-4.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-5.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 10,
+      "ids": [
+        43,
+        44,
+        45,
+        46
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 1 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Ghost, reference image1 column3, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: Kaiser, reference image1 column4, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Old Fox, reference image1 column5, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Ambassador, reference image1 column6, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-5.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    },
+    {
+      "index": 11,
+      "ids": [
+        47,
+        48,
+        1,
+        2
+      ],
+      "prompt": "Create a transparent PIXEL GAME WALK ANIMATION atlas for FOUR existing characters. First 2 reference image(s) are IDENTITY references only (seated characters), LAST reference is Toby's walking animation STYLE and POSE template. Convert characters to STANDING/WALKING upright, NOT seated.\nEXACTLY 8 COLUMNS × 8 ROWS =64 sprites, equal cells, generous transparent gutters. Four complete 4×4 character animation sheets arranged in a 2×2 block layout.\nTOP LEFT 4×4 block: Justice, reference image1 column7, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nTOP RIGHT 4×4 block: God Eye, reference image1 column8, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM LEFT 4×4 block: Toby, reference image2 column1, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nBOTTOM RIGHT 4×4 block: Momo, reference image2 column2, preserve EXACT hairstyle, colors, outfit, age/species and accessories.\nWithin EVERY 4×4 block, rows1–4 are FRONT/down, LEFT profile, RIGHT profile, BACK/up. Columns1–4 are idle feet together, LEFT-foot-forward stride with RIGHT arm forward, idle feet together, RIGHT-foot-forward stride with LEFT arm forward. Both stride frames visibly alternate legs and arms, never identical. On front/back views show alternating extended shoe and raised heel, not just a static portrait. On left/right views use one eye, sideways chest and distinct walking legs. ALL SAME HEIGHT, same head ratio~40%, same baseline and same scale across all16frames. Faithful Stardew-style chunky pixel shading, clear eyes, 32-color palette, no painterly smoothing or huge chibi heads. Preserve all outfits and facial/hair identities. Robes/dresses sway slightly with alternating visible shoe steps, do not replace with trousers. If present, Ghost retains white ghost-sheet silhouette with a gentle alternating hem sway instead of invented legs; Old Fox retains orange fox head and tail; God Eye retains single eye gold halo and purple robe. All 64cells present. No text/gridlines/shadows/ground/chairs/background. Genuinely transparent alpha.",
+      "references": [
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-5.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/hall/valley/source/roster-0.png",
+        "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/exploration/toby-source.png"
+      ]
+    }
+  ]
+}

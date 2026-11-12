@@ -55,6 +55,8 @@ import { SDV } from '../theme/stardewPixel';
 import { PIXEL_ART_SPRITE } from '../theme/pixelArtImage';
 import { setRuntimeLlmProviderOverride } from '../llm/providerEnv';
 import HubDayNightBackground from '../components/HubDayNightBackground';
+import PixelAvatarSprite from '../components/PixelAvatarSprite';
+import { USER_PIXEL_AVATAR_CONFIG_KEY, parsePixelAvatarConfig, type PixelAvatarConfig } from '../constants/avatarCreator';
 
 const GLASS_INNER_BG = 'rgba(255, 255, 255, 0.55)' as const;
 const SETTINGS_SHELL_MAX_W = 1120;
@@ -113,6 +115,7 @@ export default function SettingsScreen({ navigation }: any) {
   const [lang, setLang] = useState<AppLanguage>('zh');
   const [draftNick, setDraftNick] = useState('');
   const [draftAvatar, setDraftAvatar] = useState(3);
+  const [pixelAvatar, setPixelAvatar] = useState<PixelAvatarConfig | null>(null);
   const [cloudModelEnabled, setCloudModelEnabled] = useState(true);
   const [hubBgmEnabled, setHubBgmEnabled] = useState(false);
   const [gameSfxEnabled, setGameSfxEnabled] = useState(true);
@@ -123,7 +126,7 @@ export default function SettingsScreen({ navigation }: any) {
     // Keep previous UI visible while refreshing prefs — avoid a second spinner
     // after the lazy chunk already painted.
     try {
-      const [rawLang, n, a, cloudRaw, hubOn, sfxOn, voiceOn] = await Promise.all([
+      const [rawLang, n, a, cloudRaw, hubOn, sfxOn, voiceOn, rawPixel] = await Promise.all([
         AsyncStorage.getItem(APP_LANGUAGE_KEY),
         AsyncStorage.getItem(USER_NICKNAME_KEY),
         AsyncStorage.getItem(USER_AVATAR_INDEX_KEY),
@@ -131,9 +134,11 @@ export default function SettingsScreen({ navigation }: any) {
         readHubBgmEnabled(),
         readGameSfxEnabled(),
         readAiVoiceEnabled(),
+        AsyncStorage.getItem(USER_PIXEL_AVATAR_CONFIG_KEY),
       ]);
       const L: AppLanguage = rawLang === 'en' ? 'en' : 'zh';
       setLang(L);
+      setPixelAvatar(parsePixelAvatarConfig(rawPixel));
       const idx = parseInt(a ?? '', 10);
       setDraftNick(n ?? '');
       setDraftAvatar(
@@ -295,33 +300,18 @@ export default function SettingsScreen({ navigation }: any) {
                   </View>
                 </View>
                 <View style={styles.personalColAvatar}>
-                  <Text style={styles.fieldLabel}>{t.settingsAvatar}</Text>
-                  <View style={styles.avatarRow}>
-                    {Array.from({ length: HUMAN_CHIBI_COUNT }, (_, i) => {
-                      const selected = draftAvatar === i;
-                      return (
-                        <TouchableOpacity
-                          key={i}
-                          style={[styles.avatarCell, selected && styles.avatarCellOn]}
-                          onPress={() => setDraftAvatar(i)}
-                          activeOpacity={0.85}
-                        >
-                          <View style={styles.avatarClip}>
-                            <Image
-                              source={getChibiAvatarByIndex(i)}
-                              style={[PIXEL_ART_SPRITE, styles.avatarImg]}
-                              resizeMode="cover"
-                            />
-                          </View>
-                          {selected ? (
-                            <View style={styles.avatarCheck}>
-                              <Check size={9} color="#fff9e8" strokeWidth={3} />
-                            </View>
-                          ) : null}
-                        </TouchableOpacity>
-                      );
-                    })}
-                  </View>
+                  <Text style={styles.fieldLabel}>{lang === 'zh' ? '个人形象' : 'Your character'}</Text>
+                  <TouchableOpacity accessibilityRole="button" accessibilityLabel={lang === 'zh' ? '选择个人形象' : 'Choose your character'}
+                    onPress={() => navigation.navigate('AvatarCreator')} style={styles.creatorEntry}>
+                    <View style={styles.creatorPortrait}>
+                      {pixelAvatar ? <PixelAvatarSprite config={pixelAvatar} size={48} /> : <Image source={getChibiAvatarByIndex(draftAvatar)} style={[PIXEL_ART_SPRITE, { width: 48, height: 64 }]} resizeMode="contain" />}
+                    </View>
+                    <View style={{ flex: 1, gap: 5 }}>
+                      <Text style={styles.creatorTitle}>{lang === 'zh' ? '选择形象' : 'Choose a character'}</Text>
+                      <Text style={styles.creatorHint}>{lang === 'zh' ? '男女各三款：亚比、可爱、正常风。' : 'Alternative, cute and everyday styles.'}</Text>
+                    </View>
+                    <Pencil size={18} color={SDV.wood} />
+                  </TouchableOpacity>
                 </View>
               </View>
             </SettingsSection>
@@ -577,6 +567,10 @@ const styles = StyleSheet.create({
     flex: 0.42,
     minWidth: 120,
   },
+  creatorEntry: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 10, borderWidth: 2, borderColor: '#b9884c', backgroundColor: '#fae6bd', borderRadius: 6 },
+  creatorPortrait: { width: 58, height: 76, alignItems: 'center', justifyContent: 'center', backgroundColor: '#d8d8ae', borderRadius: 3 },
+  creatorTitle: { fontSize: 16, fontWeight: '900', color: SDV.ink },
+  creatorHint: { fontSize: 11, lineHeight: 17, color: SDV.subtext },
   personalColAvatar: {
     flex: 0.58,
     minWidth: 0,

@@ -63,6 +63,8 @@ import {
   type AvatarItemTransformMap,
   type PixelAvatarConfig,
 } from '../constants/avatarCreator';
+import { MatchHallRoomScene } from '../components/HallRoomScene';
+import { assignHallSeats } from '../constants/hallScene';
 import { GAME_ROOM_BACKGROUND_DAY, GAME_ROOM_BACKGROUND_NIGHT } from '../constants/gameRoomSceneImages';
 import { LOYAL_SERVANT_CARD_IMAGES } from '../constants/roleCardImages';
 import RoleIdentityCard from '../components/RoleIdentityCard';
@@ -431,7 +433,6 @@ export default function AvalonGameRoomScreen({ route, navigation }: any) {
   const [evilDiscussionSecondsLeft, setEvilDiscussionSecondsLeft] = useState(EVIL_DISCUSSION_DURATION_SEC);
   const [activeSpeech, setActiveSpeech] = useState<{ playerId: string; text: string } | null>(null);
   const [thinkingSeatId, setThinkingSeatId] = useState<string | null>(null);
-  const [tableLayout, setTableLayout] = useState({ width: 0, height: 0 });
   const [actionParchmentLayout, setActionParchmentLayout] = useState({ width: 0, height: 0 });
   const [questNumber, setQuestNumber] = useState<AvalonQuestNumber>(1);
   const [questResults, setQuestResults] = useState<AvalonQuestResolution[]>([]);
@@ -532,7 +533,7 @@ export default function AvalonGameRoomScreen({ route, navigation }: any) {
     }) => {
       if (!params.isActive()) return;
       if (seatSpeechAbortRef.current !== params.abortGen) return;
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 180));
       if (!params.isActive() || seatSpeechAbortRef.current !== params.abortGen) return;
       setThinkingSeatId(params.seatId);
       const result = await params.request();
@@ -1788,10 +1789,6 @@ export default function AvalonGameRoomScreen({ route, navigation }: any) {
       ? getPlayerGridAvatar(seat.id, humanAvatarIndex)
       : getCharacterPickerPortraitById(seat.id);
 
-  const seatPositions = useMemo(
-    () => avalonRingPositions(seats.length, tableLayout.width, tableLayout.height, compact),
-    [compact, seats.length, tableLayout.height, tableLayout.width]
-  );
 
   const nightEmojiForSeat = (seat: AvalonSeat): string | null => {
     if (!humanSeat || phase !== 'night' || !matchStarted) return null;
@@ -1970,17 +1967,24 @@ export default function AvalonGameRoomScreen({ route, navigation }: any) {
   return (
     <View style={[styles.root, screenFillStyle]}>
       <StatusBar hidden />
-      <View style={styles.gameScreenBackdropWrap} pointerEvents="none">
-        <Image
-          accessibilityIgnoresInvertColors
-          source={phase === 'night' ? GAME_ROOM_BACKGROUND_NIGHT : GAME_ROOM_BACKGROUND_DAY}
-          style={[PIXEL_ART_BACKGROUND_IMAGE, styles.gameScreenBackdrop, gameBackdropPanStyle]}
-          resizeMode="contain"
-        />
-      </View>
-      <SafeAreaView style={styles.safe}>
-        <View style={[styles.main, compact && styles.mainCompact]}>
-          <View style={styles.leftColumn}>
+      <MatchHallRoomScene panX={backdropPanX} night={phase === 'night'} seatCount={seats.length}
+        selected={phase === 'assassination' ? assassinationTargetId : null}
+        occupants={assignHallSeats(seats).map(seat => ({
+          ...seat, characterId: seat.character?.id ?? seat.id, avatarSource: seatAvatar(seat),
+          badge: `${seat.id === currentLeader.id ? '👑' : ''}${nightEmojiForSeat(seat) ?? knowledgeEmojiForSeat(seat) ?? ''}${teamIds.includes(seat.id) ? '⚔️' : ''}`,
+          highlighted: teamIds.includes(seat.id),
+          speaking: activeSpeech?.playerId === seat.id || thinkingSeatId === seat.id,
+          speech: thinkingSeatId === seat.id ? gameCopy[lang].aiThinking : activeSpeech?.playerId === seat.id ? activeSpeech.text : undefined,
+          stickerSource: seat.isHuman && humanSticker ? resolveStickerSource(humanSticker) ?? undefined : undefined,
+        }))}
+        renderHuman={humanPixelAvatar ? (width, facing) => <PixelAvatarSprite config={humanPixelAvatar} size={width} pose="seated" facing={facing} transforms={humanPixelAvatarTransforms} /> : undefined}
+        onSeatPress={seatId => {
+          const seat = assignHallSeats(seats).find(player => player.seatId === seatId);
+          if (seat && ((phase === 'proposal' && currentLeader.isHuman) || (canSelectAssassination && assassinationCandidates.includes(seat.id)))) handleSeatPress(seat);
+        }} />
+      <SafeAreaView pointerEvents="box-none" style={styles.safe}>
+        <View pointerEvents="box-none" style={[styles.main, compact && styles.mainCompact]}>
+          <View pointerEvents="box-none" style={styles.leftColumn}>
         <View style={[styles.header, compact && styles.headerCompact]}>
           <View style={styles.headerSideRail}>
             <TouchableOpacity
@@ -2018,111 +2022,8 @@ export default function AvalonGameRoomScreen({ route, navigation }: any) {
           </View>
         </View>
 
-          <View style={styles.tableArea}>
-            <View
-              style={styles.seatGrid}
-              onLayout={(event) => {
-                const { width, height } = event.nativeEvent.layout;
-                if (width > 0 && height > 0) setTableLayout({ width, height });
-              }}
-            >
-              {seats.map((seat, index) => {
-                const isLeader = seat.id === currentLeader.id;
-                const onTeam = teamIds.includes(seat.id);
-                const selectedAssassination = assassinationTargetId === seat.id && phase === 'assassination';
-                const position = seatPositions[index] ?? { left: 0, top: 0 };
-                const nightEmoji = nightEmojiForSeat(seat);
-                const knowledgeEmoji = knowledgeEmojiForSeat(seat);
-                const topEmoji = `${isLeader ? '👑' : ''}${nightEmoji ?? knowledgeEmoji ?? ''}`;
-                const speaking = activeSpeech?.playerId === seat.id;
-                const thinking = thinkingSeatId === seat.id;
-                const stickerSource = seat.isHuman && humanSticker
-                  ? resolveStickerSource(humanSticker)
-                  : null;
-                const selectable =
-                  (phase === 'proposal' && currentLeader.isHuman) ||
-                  (canSelectAssassination && assassinationCandidates.includes(seat.id));
-                return (
-                  <TouchableOpacity
-                    key={seat.id}
-                    activeOpacity={selectable ? 0.82 : 1}
-                    onPress={() => handleSeatPress(seat)}
-                    disabled={!selectable}
-                    style={[
-                      styles.seatCard,
-                      compact && styles.seatCardCompact,
-                      onTeam && styles.seatCardOnTeam,
-                      selectedAssassination && styles.seatCardAssassination,
-                      seat.isHuman && styles.seatCardHuman,
-                      (speaking || thinking) && styles.seatCardSpeaking,
-                      { left: position.left, top: position.top },
-                    ]}
-                  >
-                    {speaking || thinking ? (
-                      <View style={[styles.speechBubble, thinking && styles.thinkingBubble]} pointerEvents="none">
-                        <Text style={styles.speechBubbleText}>
-                          {thinking ? gameCopy[lang].aiThinking : activeSpeech?.text}
-                        </Text>
-                        <View style={styles.speechBubbleArrow} />
-                      </View>
-                    ) : null}
-                    {stickerSource ? (
-                      <View style={styles.seatStickerBubble} pointerEvents="none">
-                        <Image
-                          source={stickerSource}
-                          style={[PIXEL_ART_SPRITE, styles.seatStickerImage]}
-                          resizeMode="contain"
-                        />
-                      </View>
-                    ) : null}
-                    {onTeam ? (
-                      <View style={styles.teamBadge}>
-                        <Swords size={12} color="#fff7df" />
-                      </View>
-                    ) : null}
-                    <View style={styles.portraitSlotWrap}>
-                      <Text style={styles.topEmoji} pointerEvents="none">{topEmoji || ' '}</Text>
-                      <View style={styles.seatNumberBadge} pointerEvents="none">
-                        <View style={styles.seatNumberInset}>
-                          <Text style={styles.seatNumberText}>{index + 1}</Text>
-                        </View>
-                      </View>
-                      <View style={[styles.portraitWoodOuter, compact && styles.portraitWoodOuterCompact]}>
-                        <View style={[styles.portraitGoldRing, compact && styles.portraitGoldRingCompact]}>
-                          <View style={[styles.portraitFaceClip, compact && styles.portraitFaceClipCompact]}>
-                            {seat.isHuman ? (
-                              humanPixelAvatar ? (
-                                <PixelAvatarSprite
-                                  config={humanPixelAvatar}
-                                  size={compact ? 28 : 36}
-                                  transforms={humanPixelAvatarTransforms}
-                                />
-                              ) : (
-                                <Image
-                                  source={seatAvatar(seat)}
-                                  style={[PIXEL_ART_SPRITE, styles.seatAvatar, compact && styles.seatAvatarCompact]}
-                                  resizeMode="contain"
-                                />
-                              )
-                            ) : (
-                              <BodyPortraitImage
-                                source={seatAvatar(seat)}
-                                showStandGrass={false}
-                                style={[styles.aiPortrait, compact && styles.aiPortraitCompact]}
-                                resizeMode="contain"
-                              />
-                            )}
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                    <Text style={[styles.seatName, compact && styles.seatNameCompact]} numberOfLines={1}>
-                      {seat.name}{seat.isHuman ? ` · ${t.you}` : ''}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
+          <View pointerEvents="box-none" style={styles.tableArea}>
+            <View pointerEvents="none" style={styles.seatGrid} />
             <View style={styles.tableFooter}>
               <View style={styles.rolePill}>
                 <Sparkles size={13} color={GOLD} />
@@ -2671,7 +2572,7 @@ const styles = StyleSheet.create({
     paddingBottom: 9,
   },
   tableArea: { flex: 1, minWidth: 0, justifyContent: 'space-between' },
-  seatGrid: { flex: 1, minHeight: 0, position: 'relative', overflow: 'visible' },
+  seatGrid: { alignItems: 'center', justifyContent: 'center', flex: 1, minHeight: 0, position: 'relative', overflow: 'visible' },
   seatCard: {
     position: 'absolute',
     width: AVALON_SEAT_W,

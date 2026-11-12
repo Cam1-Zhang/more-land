@@ -23,7 +23,10 @@ import CharacterSelectScreen from '../screens/CharacterSelectScreen';
 
 type RootStackParamList = {
   Home: undefined;
+  Exploration: undefined;
+  HallScene: undefined;
   Settings: undefined;
+  AvatarCreator: undefined;
   Tutorial: undefined;
   CharacterSelect: undefined;
   TeamLobby: undefined;
@@ -35,6 +38,9 @@ const navigationRef = createNavigationContainerRef<RootStackParamList>();
 const NAV_STATE_PERSIST_KEY = 'ai_werewolf_nav_state_v2';
 
 const TutorialScreen = makeLazyScreen(LAZY_SCREEN_IMPORTS.Tutorial);
+const AvatarCreatorScreen = makeLazyScreen(LAZY_SCREEN_IMPORTS.AvatarCreator);
+const ExplorationScreen = makeLazyScreen(LAZY_SCREEN_IMPORTS.Exploration);
+const HallSceneScreen = makeLazyScreen(LAZY_SCREEN_IMPORTS.HallScene);
 const TeamLobbyScreen = makeLazyScreen(LAZY_SCREEN_IMPORTS.TeamLobby);
 const GameRoomScreen = makeLazyScreen(LAZY_SCREEN_IMPORTS.GameRoom);
 const AvalonGameRoomScreen = makeLazyScreen(LAZY_SCREEN_IMPORTS.AvalonGameRoom);
@@ -189,7 +195,10 @@ export default function RootNavigator() {
           }}
         >
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Exploration" component={ExplorationScreen} />
+          <Stack.Screen name="HallScene" component={HallSceneScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="AvatarCreator" component={AvatarCreatorScreen} />
           <Stack.Screen name="Tutorial" component={TutorialScreen} />
           <Stack.Screen name="CharacterSelect" component={CharacterSelectScreen} />
           <Stack.Screen name="TeamLobby" component={TeamLobbyScreen} />

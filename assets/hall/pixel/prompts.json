@@ -1,0 +1,45 @@
+{
+  "mode": "built-in image_gen",
+  "prompt": "Use case: style-transfer. This is a GAME SPRITE asset, not an illustration. Inputs 1 and 2 (tiny Toby and Momo sheets) are the STRICT ART STYLE reference: visibly chunky square pixels, simple hand-placed pixel clusters, warm brown 1-pixel outlines, restricted 12-20 color palette per character, two-tone shading, tiny simple 1-2 pixel eyes. Input 3 is identity/pose/layout reference ONLY. Its smooth detailed rendering is WRONG and must be discarded. Rebuild the third image's eight characters in exactly the coarse low-resolution pixel technique of inputs 1 and 2. Each seated character should look hand-drawn at about 24 pixels wide by 42 pixels tall, then nearest-neighbor enlarged; clear square staircase edges and large flat blocks of color, 2x2 visible pixel blocks when normalized to 84px height. No subpixel/smooth curves, antialiasing, blur, gradients, glossy hair, realistic shading, painterly detail, fine strands or black anime eyes. Preserve third-image identities, outfits, colors, hairstyles, head-to-body proportions and sitting poses and equal full seated height. Do NOT shrink heads or shorten bodies: only change rendering technique. All 8 columns and all 4 rows must remain in exact order: front, left-facing, right-facing, back; 32 separate figures with generous transparent gutters. Genuine transparent background, no checkerboard, no shadows, no chairs, no letters, no grid. Head/body pixel scale must match Toby/Momo exactly, simple readable face. Skin hands filled solid; not black gloves. If first two columns are Toby/Momo, keep their identities and match exact approved input styles. Output landscape sprite atlas.",
+  "references": [
+    "../toby-seated.png",
+    "../momo-seated-v3.png"
+  ],
+  "export": {
+    "frameWidth": 80,
+    "frameHeight": 96,
+    "visibleHeight": 84,
+    "footBaseline": 92,
+    "pixelGrid": 2,
+    "colorsPerFrame": 32,
+    "dither": 0,
+    "alpha": "binary",
+    "scaling": "nearest"
+  },
+  "sources": [
+    {
+      "group": 0,
+      "path": "source/roster-0.png"
+    },
+    {
+      "group": 1,
+      "path": "source/roster-1.png"
+    },
+    {
+      "group": 2,
+      "path": "source/roster-2.png"
+    },
+    {
+      "group": 3,
+      "path": "source/roster-3.png"
+    },
+    {
+      "group": 4,
+      "path": "source/roster-4.png"
+    },
+    {
+      "group": 5,
+      "path": "source/roster-5.png"
+    }
+  ]
+}

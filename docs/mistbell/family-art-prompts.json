@@ -1,0 +1,76 @@
+[
+  {
+    "name": "family-generations",
+    "prompt": "Use the attached approved courtyard ONLY as pixel art STYLE reference (not its exterior composition). Stardew Valley inspired crisp true 16-bit pixel tiles, readable large pixel clusters, dark pixel outlines, warm Nordic timber, green/cream textiles, flat overhead three-quarter game camera. Absolutely no painterly gradients, photorealism, blur, isometric diamond, letters, labels, watermark, UI, or characters. Full bleed rectangular 1536x1024 PNG. Create one full playable cutaway HOME interior, NOT a dormitory. Image coordinates: entire floor from x160 to1376, y390 to910. Bottom-center entrance threshold x768,y976 with open approach. Keep central and lower floor x250..1290,y540..900 CLEAR for walking. Place all solid furniture ABOVE y510 or along far sides x<220/x>1316. Upper rooms separated by cutaway walls. Visible domestic kitchen, food shelves, lived-in sitting nook and bedrooms; doors face the central living floor. A small family album on a narrow console centered at x768,y414. No repeated row of locked doors. The lower wooden floor can have flat woven rugs. Window plant pots. A three-generation four-person family home. THREE distinct upstairs cutaway bedrooms: grandfather single green bed and old repair tools, parents double cream quilt bed, adult daughter single blush bed and flower books. Main shared kitchen and cozy hearth sitting nook along upper left/right edges. Four place settings on small table near upper wall.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "family-three",
+    "prompt": "Use the attached approved courtyard ONLY as pixel art STYLE reference (not its exterior composition). Stardew Valley inspired crisp true 16-bit pixel tiles, readable large pixel clusters, dark pixel outlines, warm Nordic timber, green/cream textiles, flat overhead three-quarter game camera. Absolutely no painterly gradients, photorealism, blur, isometric diamond, letters, labels, watermark, UI, or characters. Full bleed rectangular 1536x1024 PNG. Create one full playable cutaway HOME interior, NOT a dormitory. Image coordinates: entire floor from x160 to1376, y390 to910. Bottom-center entrance threshold x768,y976 with open approach. Keep central and lower floor x250..1290,y540..900 CLEAR for walking. Place all solid furniture ABOVE y510 or along far sides x<220/x>1316. Upper rooms separated by cutaway walls. Visible domestic kitchen, food shelves, lived-in sitting nook and bedrooms; doors face the central living floor. A small family album on a narrow console centered at x768,y414. No repeated row of locked doors. The lower wooden floor can have flat woven rugs. Window plant pots. A parent and two ADULT children or three adult siblings. THREE separate cozy private bedrooms across upper portion, each with ONE single bed. Blue, sage, and ochre blankets; one orderly study, one book nook, one souvenirs chest. Full family kitchen and shared cozy sitting area. Exactly three beds, NO double beds.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "family-two",
+    "prompt": "Use the attached approved courtyard ONLY as pixel art STYLE reference (not its exterior composition). Stardew Valley inspired crisp true 16-bit pixel tiles, readable large pixel clusters, dark pixel outlines, warm Nordic timber, green/cream textiles, flat overhead three-quarter game camera. Absolutely no painterly gradients, photorealism, blur, isometric diamond, letters, labels, watermark, UI, or characters. Full bleed rectangular 1536x1024 PNG. Create one full playable cutaway HOME interior, NOT a dormitory. Image coordinates: entire floor from x160 to1376, y390 to910. Bottom-center entrance threshold x768,y976 with open approach. Keep central and lower floor x250..1290,y540..900 CLEAR for walking. Place all solid furniture ABOVE y510 or along far sides x<220/x>1316. Upper rooms separated by cutaway walls. Visible domestic kitchen, food shelves, lived-in sitting nook and bedrooms; doors face the central living floor. A small family album on a narrow console centered at x768,y414. No repeated row of locked doors. The lower wooden floor can have flat woven rugs. Window plant pots. TWO adult relatives sharing a family home. TWO distinct private bedrooms in upper left and upper right, ONE single bed per room, sage and ochre blankets. Shared center kitchen and breakfast counter, family photographs and small sitting nook. Exactly two single beds, no double bed.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "family-couple",
+    "prompt": "Use the attached approved courtyard ONLY as pixel art STYLE reference (not its exterior composition). Stardew Valley inspired crisp true 16-bit pixel tiles, readable large pixel clusters, dark pixel outlines, warm Nordic timber, green/cream textiles, flat overhead three-quarter game camera. Absolutely no painterly gradients, photorealism, blur, isometric diamond, letters, labels, watermark, UI, or characters. Full bleed rectangular 1536x1024 PNG. Create one full playable cutaway HOME interior, NOT a dormitory. Image coordinates: entire floor from x160 to1376, y390 to910. Bottom-center entrance threshold x768,y976 with open approach. Keep central and lower floor x250..1290,y540..900 CLEAR for walking. Place all solid furniture ABOVE y510 or along far sides x<220/x>1316. Upper rooms separated by cutaway walls. Visible domestic kitchen, food shelves, lived-in sitting nook and bedrooms; doors face the central living floor. A small family album on a narrow console centered at x768,y414. No repeated row of locked doors. The lower wooden floor can have flat woven rugs. Window plant pots. A married couple home. ONE bedroom upper right with one DOUBLE bed and two bedside tables; kitchen upper left with food and hanging pans, study corner and two-person dining area along upper middle. Shared hearth sitting nook; personal shelves for two adults.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "home-solo",
+    "prompt": "Use the attached approved courtyard ONLY as pixel art STYLE reference (not its exterior composition). Stardew Valley inspired crisp true 16-bit pixel tiles, readable large pixel clusters, dark pixel outlines, warm Nordic timber, green/cream textiles, flat overhead three-quarter game camera. Absolutely no painterly gradients, photorealism, blur, isometric diamond, letters, labels, watermark, UI, or characters. Full bleed rectangular 1536x1024 PNG. Create one full playable cutaway HOME interior, NOT a dormitory. Image coordinates: entire floor from x160 to1376, y390 to910. Bottom-center entrance threshold x768,y976 with open approach. Keep central and lower floor x250..1290,y540..900 CLEAR for walking. Place all solid furniture ABOVE y510 or along far sides x<220/x>1316. Upper rooms separated by cutaway walls. Visible domestic kitchen, food shelves, lived-in sitting nook and bedrooms; doors face the central living floor. A small family album on a narrow console centered at x768,y414. No repeated row of locked doors. The lower wooden floor can have flat woven rugs. Window plant pots. An independent adult home, modest complete house. ONE bedroom upper right with one SINGLE bed and wardrobe; full compact kitchen upper left, book-lined work corner upper middle; cozy sitting nook, boots and jacket by entrance side.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "home-ghost",
+    "prompt": "Use the attached approved courtyard ONLY as pixel art STYLE reference (not its exterior composition). Stardew Valley inspired crisp true 16-bit pixel tiles, readable large pixel clusters, dark pixel outlines, warm Nordic timber, green/cream textiles, flat overhead three-quarter game camera. Absolutely no painterly gradients, photorealism, blur, isometric diamond, letters, labels, watermark, UI, or characters. Full bleed rectangular 1536x1024 PNG. Create one full playable cutaway HOME interior, NOT a dormitory. Image coordinates: entire floor from x160 to1376, y390 to910. Bottom-center entrance threshold x768,y976 with open approach. Keep central and lower floor x250..1290,y540..900 CLEAR for walking. Place all solid furniture ABOVE y510 or along far sides x<220/x>1316. Upper rooms separated by cutaway walls. Visible domestic kitchen, food shelves, lived-in sitting nook and bedrooms; doors face the central living floor. A small family album on a narrow console centered at x768,y414. No repeated row of locked doors. The lower wooden floor can have flat woven rugs. Window plant pots. A ghost resident has a formal private home. NO beds, NO kitchen, NO food, NO dining dishes. Upper portion contains river-facing windows, bookshelves, old keepsake cabinets, a desk and TWO chairs for visitors, dried lavender, small bells and gifts left by neighbors. Warm inhabited feeling without needing sleep or eating. Wide clear central wooden floor and flat woven rug.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "marketRoad-family",
+    "prompt": "Use case: precise-object-edit. Image 1 is the target map scene. Image 2 is the pixel style master. Retain the existing blue house at upper left exactly. Replace only the upper-right benches with ONE complete small white timber Nordic cottage with slate roof, flower window boxes and a friendly front sitting porch. Its doorway center x1160,y285. All roof and walls visible. Exactly TWO houses total. Keep west/east boundary passage centers y560, ALL lower lawn and perimeter unchanged. Preserve exact target dimensions 1536x1024, camera, scale, saturated crisp pixel tiles, cluster size, trees, color palette. New houses match the attached approved pixel art: not realistic or painterly. No text, people, UI or watermark.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/marketRoad-nordic.png",
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "riverRoad-family",
+    "prompt": "Use case: precise-object-edit. Image 1 is the target map scene. Image 2 is the pixel style master. Replace upper laundry and picnic areas with THREE complete small occupied Nordic cottages, all within y30..350: left gray timber house door x300,y320; middle warm red timber house door x768,y320; right sage cottage door x1236,y320. All roofs visible. Keep this scene as a flower meadow, not a paved street. A small laundry corner beside left home, little bell by right home. Keep west/east openings at y560 and the entire lower grass/perimeter unchanged. Exactly three homes. Preserve exact target dimensions 1536x1024, camera, scale, saturated crisp pixel tiles, cluster size, trees, color palette. New houses match the attached approved pixel art: not realistic or painterly. No text, people, UI or watermark.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/riverRoad-nordic.png",
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "forestRoad-family",
+    "prompt": "Use case: precise-object-edit. Image 1 is the target map scene. Image 2 is the pixel style master. Add TWO whole modest Nordic family cottages ONLY in upper left and upper right where benches now stand: left ochre cottage with charcoal roof door x330,y330; right pale moss green cottage door x1206,y330. All roofs visible. Central north opening x768 stays fully open between homes. South opening x768..840 stays exactly. Flower meadow lower half unchanged. No road required. Exactly two homes. Preserve exact target dimensions 1536x1024, camera, scale, saturated crisp pixel tiles, cluster size, trees, color palette. New houses match the attached approved pixel art: not realistic or painterly. No text, people, UI or watermark.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/forestRoad-nordic.png",
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  },
+  {
+    "name": "hillRoad-family",
+    "prompt": "Use case: precise-object-edit. Image 1 is the target map scene. Image 2 is the pixel style master. Add TWO whole small Nordic private cottages ONLY in upper left and upper right: left deep plum timber family cottage with moss green roof door x330,y330, herbs outside; right plain gray stone/timber cottage with charcoal roof door x1206,y330, one small window. All roofs visible. Keep center north/south openings at x768 completely open, all lower meadow and cliffs unchanged. Exactly two homes. Preserve exact target dimensions 1536x1024, camera, scale, saturated crisp pixel tiles, cluster size, trees, color palette. New houses match the attached approved pixel art: not realistic or painterly. No text, people, UI or watermark.",
+    "references": [
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/scenes/hillRoad-nordic.png",
+      "/Users/camille/Documents/Codex/我的项目/ai-werewolf/assets/mistbell/nordic-approved-reference.png"
+    ]
+  }
+]

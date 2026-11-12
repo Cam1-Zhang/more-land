@@ -36,6 +36,10 @@ export type SpeechContext = {
   channel?: SpeechChannel;
   humanPlayerName?: string;
   priorSpeakerName?: string | null;
+  /** Players who have already spoken in the current public speaking phase. */
+  alreadySpokenThisPhase?: string[];
+  /** Players whose current-phase speech has not happened yet. */
+  notYetSpokenThisPhase?: string[];
   preparedDialogue?: PreparedAiSpeechDialogue | null;
   dayExileVotesPublic?: boolean;
   wolfSelfRevealName?: string | null;

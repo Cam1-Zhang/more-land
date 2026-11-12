@@ -244,7 +244,7 @@ function avalonTableRosterBlock(
 
 type AvalonSpeechRetryReason = 'meta' | 'required' | 'format' | 'echo' | null;
 
-const SPEECH_PARSE_RETRY_DELAYS_MS = [0, 800, 1_500, 2_500, 4_000] as const;
+const SPEECH_PARSE_RETRY_DELAYS_MS = [0, 300, 500] as const;
 
 function splitAvalonSpeechSentences(text: string): string[] {
   const normalized = text.replace(/\r/g, '').trim();
@@ -803,7 +803,7 @@ async function requestRaw(
   contentOnly = true,
   temperatureBoost = 0
 ): Promise<string | null> {
-  const retryDelaysMs = [0, 1_500, 4_000];
+  const retryDelaysMs = [0];
   let lastError: unknown = null;
   const modelLabel = base.actor.modelRef?.model ?? 'default model';
 
@@ -819,7 +819,7 @@ async function requestRaw(
         messages: toChatMessages(systemPrompt(base.actor, base.lang), task),
         temperature: Math.min(1, baseTemp + temperatureBoost),
         maxTokens,
-        timeoutMs: 90_000,
+        timeoutMs: 30_000,
         contentOnly,
       });
     } catch (error) {
@@ -840,7 +840,7 @@ async function requestRaw(
             messages: toChatMessages(systemPrompt(base.actor, base.lang), task),
             temperature: Math.min(1, baseTemp + temperatureBoost),
             maxTokens,
-            timeoutMs: 90_000,
+            timeoutMs: 30_000,
             contentOnly,
           });
         } catch (fallbackError) {
@@ -1227,9 +1227,6 @@ export async function requestAvalonSpeech(
 
   const passes: ReadonlyArray<{ reason: AvalonSpeechRetryReason; relaxed: boolean }> = [
     { reason: null, relaxed: false },
-    { reason: 'echo', relaxed: false },
-    { reason: 'meta', relaxed: false },
-    { reason: 'required', relaxed: false },
     { reason: 'format', relaxed: false },
     { reason: 'format', relaxed: true },
   ];

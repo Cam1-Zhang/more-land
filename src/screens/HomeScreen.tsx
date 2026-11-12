@@ -21,7 +21,7 @@ import {
   homeChromeTop,
   HUB_CHROME_GAP,
 } from '../utils/homeTopChromeLayout';
-import { Sun, Moon, Settings, Lightbulb } from 'lucide-react-native';
+import { Sun, Moon, Settings, Lightbulb, Compass } from 'lucide-react-native';
 import HubDayNightBackground from '../components/HubDayNightBackground';
 import { GameWoodButton } from '../components/GameWoodButton';
 import { HomeMenuModuleButton } from '../components/HomeMenuModuleButton';
@@ -137,6 +137,13 @@ export default function HomeScreen({ navigation }: any) {
       <HubDayNightBackground scene={homeHubScene} style={[styles.bg, screenFillStyle]}>
         <View style={[styles.bgStack, screenFillStyle]}>
           <View style={[styles.topRightCluster, { top: chromeTop, right: chromeRight }]}>
+            <GameWoodButton
+              variant="text"
+              label={lang === 'zh' ? '探索' : 'Explore'}
+              leftIcon={<Compass size={20} color={GAME_WOOD_BTN.text} />}
+              onPress={() => navigation.navigate('Exploration')}
+              compact
+            />
             <GameWoodButton
               variant="icon"
               onPress={() => navigation.navigate('Settings')}

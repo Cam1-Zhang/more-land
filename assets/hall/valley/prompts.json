@@ -1,0 +1,47 @@
+{
+  "mode": "built-in image_gen",
+  "brief": "参考星露谷的人物比例和像素风，保留原角色的发型、发色、面部特征、服装、配饰、年龄与物种；所有角色包括Toby和Momo统一高度与画风。",
+  "identityReference": "../uniform/source/roster-{0..5}.png; original Toby/Momo sheets additionally used for group 0",
+  "styleReference": "https://forums.stardewvalley.net/attachments/29181/",
+  "promptGroup0": "Use case: identity-preserve + precise-object-edit. EDIT FIRST image, preserve its transparent background and 8-column four-row layout. The user requires these exact original characters, NOT replacements. KEEP all original identities, hair silhouettes, hair colors, facial traits, clothing cuts/patterns/colors, accessories, age cues, gender and species. Do not invent different eyes, beards, ornaments or costumes. Image2 is ONLY a proportion/pixel-technique reference from Stardew Valley; do NOT copy its characters or outfits. Inputs3/4 additionally lock the original Toby/Momo identities for columns1/2. Change ONLY these two things: (A) modestly narrower, less chibi head proportions like Stardew villagers, skull+face width about 85% of current width and head height about 90% of current height, naturally lengthening neck/torso transition within unchanged total seated height. Avoid tiny heads. (B) genuine simple coarse pixel clusters, hard stepped contours, restrained palette, simple small eyes preserving original eye colors. Keep head-to-sole height, hip/hand/foot positions, sitting direction, clothing and long-hair length fixed. No whole-figure size changes. ALL eight characters follow same proportion style, four views each. Rows remain front/left/right/back, 32 figures, generous transparent gutters, actual RGBA transparency; no brown background, checkerboard, text, scenery or chairs. No glossy/painterly gradients. This is a conservative correction of existing character designs, not a creative redesign.",
+  "export": {
+    "frame": [
+      80,
+      96
+    ],
+    "visibleHeight": 84,
+    "footBaseline": 92,
+    "pixelGrid": 1,
+    "colors": 32,
+    "dither": 0,
+    "alpha": "binary",
+    "includeTobyMomo": true,
+    "note": "Export directly at 84px visible height with nearest-neighbor sampling; do not downsample to 42px, which drops eye whites and pupils. Original generated sources unchanged."
+  },
+  "sources": [
+    {
+      "group": 0,
+      "path": "source/roster-0.png"
+    },
+    {
+      "group": 1,
+      "path": "source/roster-1.png"
+    },
+    {
+      "group": 2,
+      "path": "source/roster-2.png"
+    },
+    {
+      "group": 3,
+      "path": "source/roster-3.png"
+    },
+    {
+      "group": 4,
+      "path": "source/roster-4.png"
+    },
+    {
+      "group": 5,
+      "path": "source/roster-5.png"
+    }
+  ]
+}

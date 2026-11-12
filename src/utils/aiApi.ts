@@ -52,7 +52,9 @@ export const fetchAISpeechBubbles = async (
       messages: toChatMessages(prompt.system, prompt.user),
       temperature: prompt.temperature,
       maxTokens: prompt.maxTokens,
-      timeoutMs: 180_000,
+      // Table turns should keep moving even when the provider is congested.
+      // GameRoomScreen supplies an in-character fallback after this deadline.
+      timeoutMs: 25_000,
       // Reasoning models dump CoT into reasoning_content — never treat that as table speech.
       contentOnly: true,
     });

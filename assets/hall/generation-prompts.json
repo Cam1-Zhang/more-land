@@ -1,0 +1,30 @@
+{
+  "mode": "Built-in image_gen",
+  "assets": [
+  {
+    "key": "room",
+    "ref": "assets/game-room/background_day.jpg",
+    "prompt": "Use case: precise-object-edit. Edit this exact game background to produce its empty room background layer. REMOVE ONLY the big central round wooden table, its legs/shadow and ALL playing cards. Reconstruct the burgundy oval rug underneath with a plain dark burgundy center and subtle gold border; keep rug size and position unchanged. Preserve the entire surrounding room EXACTLY: left fireplace and bookcase, wolf picture and green banner, center window with gold curtains, right notice board and door, coat stand, foreground wooden railings and lanterns, wooden floor, exact fixed camera and 16:9 composition. The original room is the edit target, not loose inspiration. Keep original warm amber daylight, fine pixel-art wood texture, crisp pixel edges. No chairs, no people, no UI, no letters, no new furnishings. Output landscape 1536x864."
+  },
+  {
+    "key": "table",
+    "ref": "assets/game-room/background_day.jpg",
+    "prompt": "Use case: background-extraction. Extract and faithfully recreate ONLY the large central round oak gaming table from this reference room, as an isolated game prop on genuine transparent alpha. Same fixed elevated camera, same ellipse proportions, same dark brown thick carved rim, horizontal honey-brown wooden planks, same large golden circle with howling wolf silhouette emblem at center. REMOVE all little playing cards from tabletop. NO rug, NO chairs, NO room, NO ground shadow. Keep shallow wooden apron and short supporting pedestal visible below front rim, not tall legs. Fine crisp pixel art, like the reference, no vector simplification. Single table centered with transparent padding, landscape canvas 1536x1024. Visible tabletop ellipse approx 1.55 width/height. Preserve identity of reference table and warm light."
+  },
+  {
+    "key": "chairs",
+    "ref": "assets/game-room/background_day.jpg",
+    "prompt": "Use case: stylized-concept. Production sprite sheet for chairs matching the room reference: dark honey oak wood, modest rustic medieval high back dining chair, carved top rail with tiny gold diamond, three vertical back slats, burgundy upholstered seat, four short legs. Small readable Stardew Valley style crisp pixel art with wood shading matching reference table. Genuine transparent alpha background, no floor, no shadows, no people. EXACTLY FOUR separate full chair sprites in a 2x2 grid of equal square cells, generous transparent gaps, consistent scale and floor baseline. Top-left chair faces toward camera/down (see front seat and inside of backrest). Top-right chair faces left. Bottom-left chair faces right. Bottom-right chair faces away/up (see rear backrest). Same elevated 3/4 camera across all chairs. Entire chair in each cell, no text, no grid lines. Square canvas."
+  },
+  {
+    "key": "tobySeated",
+    "ref": "assets/exploration/toby-source.png",
+    "prompt": "Use case: identity-preserve. Turn the character from reference into a production SEATED character sprite sheet, preserving EXACTLY the face, large clear dark eyes and eye whites, hair, colors and costume. Toby: tousled brown hair, cream shirt, brown waistcoat, tan-brown pants, dark brown boots. EXACTLY FOUR sprites in 2x2 equal square cells, generous transparent gaps. Top-left facing down/front. Top-right facing left. Bottom-left facing right. Bottom-right facing up/back. In each pose the character is genuinely sitting upright on an INVISIBLE chair: knees bent 90 degrees, thighs horizontal, boots hanging down, hands resting on thighs. NO visible chair, NO table, no shadow, transparent alpha. Same small chibi proportions and crisp pixel art as reference. Head 40% height, face clean and readable, NO blur. Match scale and feet baseline in all cells. NO standing poses, no text, no decorative grid. Square canvas."
+  },
+  {
+    "key": "momoSeated",
+    "ref": "assets/exploration/momo-source.png",
+    "prompt": "Use case: identity-preserve. Turn the character from reference into a production SEATED character sprite sheet, preserving EXACTLY the face, large clear dark eyes and eye whites, hair, colors and costume. Momo: chin length brown bob and bangs, dusty pink dress, cream apron and puff sleeves, small gold neck bow, dark shoes. EXACTLY FOUR sprites in 2x2 equal square cells, generous transparent gaps. Top-left facing down/front. Top-right facing left. Bottom-left facing right. Bottom-right facing up/back. In each pose the character is genuinely sitting upright on an INVISIBLE chair: knees bent 90 degrees, thighs horizontal, boots hanging down, hands resting on thighs. NO visible chair, NO table, no shadow, transparent alpha. Same small chibi proportions and crisp pixel art as reference. Head 40% height, face clean and readable, NO blur. Match scale and feet baseline in all cells. NO standing poses, no text, no decorative grid. Square canvas."
+  }
+]
+}

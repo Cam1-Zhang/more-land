@@ -1,3 +1,4 @@
+import { PERSONAL_AVATARS, type PersonalAvatarId } from './personalAvatars';
 import type { ImageSourcePropType } from 'react-native';
 
 export const AVATAR_CANVAS = { width: 32, height: 48 } as const;
@@ -108,6 +109,7 @@ export type AvatarAccessory =
   | 'female_accessory_10';
 
 export type PixelAvatarConfig = {
+  presetId?: PersonalAvatarId;
   bodyType: AvatarBodyType;
   skinTone: AvatarSkinTone;
   hairStyle: AvatarHairStyle;
@@ -404,7 +406,7 @@ export const DEFAULT_AVATAR_BY_BODY_TYPE: Record<AvatarBodyType, PixelAvatarConf
     skinTone: 'skin_01',
     hairStyle: 'male_hair_01',
     hairColor: '#3A2418',
-    top: 'male_top_05',
+    top: 'male_top_01',
     bottom: 'male_bottom_02',
     shoes: 'male_shoes_02',
     accessory: 'none',
@@ -414,7 +416,7 @@ export const DEFAULT_AVATAR_BY_BODY_TYPE: Record<AvatarBodyType, PixelAvatarConf
     skinTone: 'skin_01',
     hairStyle: 'female_hair_01',
     hairColor: '#3A2418',
-    top: 'female_top_05',
+    top: 'female_top_01',
     bottom: 'female_bottom_02',
     shoes: 'female_shoes_02',
     accessory: 'none',
@@ -461,14 +463,16 @@ export function parsePixelAvatarConfig(raw: string | null | undefined): PixelAva
     const defaults = DEFAULT_AVATAR_BY_BODY_TYPE[bodyType];
     const prefix = bodyType;
 
-    const hairStyle = normalizeLegacyPart(parsed.hairStyle, `${prefix}_hair`);
-    const top = normalizeLegacyPart(parsed.top, `${prefix}_top`);
+    const fourVariants = (value: string | undefined) => value?.replace(/_(\d{2})$/, (_, n: string) => `_${String((Math.max(1, Number(n)) - 1) % 4 + 1).padStart(2, '0')}`);
+    const hairStyle = fourVariants(normalizeLegacyPart(parsed.hairStyle, `${prefix}_hair`));
+    const top = fourVariants(normalizeLegacyPart(parsed.top, `${prefix}_top`));
     const bottom = normalizeLegacyPart(parsed.bottom, `${prefix}_bottom`);
     const shoes = normalizeLegacyPart(parsed.shoes, `${prefix}_shoes`);
     const accessory = normalizeLegacyPart(parsed.accessory, `${prefix}_accessory`);
     const hairColors = AVATAR_HAIR_COLORS.map((c) => c.id);
 
     return {
+      presetId: PERSONAL_AVATARS.find(avatar => avatar.id === parsed.presetId)?.id,
       bodyType,
       skinTone: includes(optionIds(optionsForBody(AVATAR_SKIN_OPTIONS, bodyType)), parsed.skinTone)
         ? parsed.skinTone

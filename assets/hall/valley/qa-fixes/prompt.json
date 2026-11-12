@@ -1,0 +1,7 @@
+{
+  "date": "2026-11-12",
+  "mode": "built-in image_gen",
+  "source": "source/mike-seated-beard.png",
+  "target": "../17-v2.png",
+  "import": "node scripts/prepare-hall-mike-beard.mjs"
+}

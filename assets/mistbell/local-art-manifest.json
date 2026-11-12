@@ -1,0 +1,33 @@
+{
+  "generator": "builtin imagegen",
+  "scenes": {
+    "farm": "79955fc2-8d3a-49b4-9de1-827523600c57",
+    "square": "af770580-f85d-43c4-b616-67e6bea97e0f",
+    "bridge": "0afb5916-827c-475d-9d76-f4cf79972731",
+    "tavern": "2dfe193e-397e-4f7b-896c-7b4aeb834b79",
+    "forest": "f9879e71-16ea-4abd-99ef-3d8d62e0c611",
+    "cabin": "6bd715f0-d330-4df9-915f-13f519df8a59",
+    "observatory": "dd2fcdfd-edbd-4d4e-9ad6-4599f1db6454",
+    "canal": "33f67f05-80c6-4675-be8c-5164b02b2b5a",
+    "door": "fa242eab-46e9-454b-aa9f-8d46c982077e",
+    "sluice": "cacc20a5-9c78-4afd-b448-ba7eb3f5da86",
+    "heart": "035b848d-bc83-4a45-851c-c4c8df0daa98"
+  },
+  "players": {
+    "male-alt": "74c10563-367a-426a-ab55-2b432a327ba4",
+    "female-alt": "474c9c05-d76c-4a65-84ab-4d6f747116d0",
+    "male-normal": "88b24e28-782c-488a-a9a7-bd940545a672",
+    "female-cute": "84164fed-4591-47f2-af42-d613991bed7b",
+    "male-cute": "3c7c4b71-7aa9-4a6b-ab6b-8a7be0b6664f",
+    "female-normal": "ffdee6a1-96a0-414b-996b-40120955d7cb"
+  },
+  "identityCorrections": {
+    "male-cute": "11a02521-da0b-4eae-beda-e56ee4fa95ca",
+    "male-normal": "d85afbce-0c2b-4c8c-b368-fc35e21b7080",
+    "female-alt": "eb1ffa5d-7a0a-4e1b-ac1f-13284c767bf6",
+    "female-normal": "79be298e-437f-4f47-9530-c6b1f834fba7"
+  },
+  "toolsSource": "5d072664-568a-4b4a-b777-709034df4525",
+  "cleanForestSource": "aa0c5c15-072d-42c2-a4fe-bd22f090713c",
+  "resourcesSource": "292723fc-d045-44ff-a70d-f38629743f39"
+}

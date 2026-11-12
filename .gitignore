@@ -51,8 +51,7 @@ all-projects-private-*.tar.gz.enc.sha256
 Apps-and-boring-4d-site-*.tar.gz
 Apps-and-boring-4d-site-*.tar.gz.sha256
 
-# OpenAI-generated AI portraits (see npm run gen:avatars)
-assets/avatars/generated/*.png
+# Imported AI portraits are runtime assets and must be included in deployments.
 
 # AI 陪练圆桌占位 sprite / 合成图（见 npm run gen:ai-coach-scene）
 assets/generated/ai_coach/
